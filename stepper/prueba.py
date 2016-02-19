@@ -29,7 +29,7 @@ def escalonada():
             count += 1
 
 
-    except KeyBoardInterupt:
+    except KeyboardInterupt:
         print "Velocidad maxima = %s"%count
 
 def rampa(pasos):

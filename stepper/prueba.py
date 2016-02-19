@@ -19,14 +19,14 @@ def avance(velocidad , pasos,direccion):
     GPIO.output(8,True)
 
 def lineal():
-    count = 0.06
+    count = 0.006
     try:
         while True:
             GPIO.output(7,True)
             time.sleep(count)
             GPIO.output(7,False)
             time.sleep(count)
-            count -= 0.001
+            count -= 0.0001
 
 
     except KeyboardInterrupt:

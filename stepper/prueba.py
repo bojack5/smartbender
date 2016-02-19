@@ -19,7 +19,7 @@ def avance(velocidad , pasos,direccion):
     GPIO.output(8,True)
 
 def lineal():
-    count = 0.006
+    count = 0.0015
     try:
         while True:
             if count < 0.000001:

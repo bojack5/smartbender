@@ -26,7 +26,7 @@ def lineal():
             time.sleep(count)
             GPIO.output(7,False)
             time.sleep(count)
-            count -= 0.000001
+            count -= 0.001
 
 
     except KeyboardInterrupt:

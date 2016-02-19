@@ -22,6 +22,9 @@ def lineal():
     count = 0.006
     try:
         while True:
+            if count < 0.000001:
+                print "limite alcanzado!"
+                count = 0.000001
             GPIO.output(7,True)
             time.sleep(count)
             GPIO.output(7,False)

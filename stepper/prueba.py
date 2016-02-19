@@ -18,6 +18,20 @@ def avance(velocidad , pasos,direccion):
         time.sleep(vel)
     GPIO.output(8,True)
 
+def escalonada(pasos):
+    count = 240
+    try:
+        while True:
+            GPIO.output(7,True)
+            time.sleep(1/count)
+            GPIO.output(7,False)
+            time.sleep(1/count)
+            count += 1
+
+
+    except KeyBoardInterupt:
+        print "Velocidad maxima = %s"%count
+
 def rampa(pasos):
     cambio = 0.1/pasos
     

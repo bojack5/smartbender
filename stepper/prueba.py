@@ -23,9 +23,9 @@ def escalonada(pasos):
     try:
         while True:
             GPIO.output(7,True)
-            time.sleep(1/count)
+            time.sleep(1.0/count)
             GPIO.output(7,False)
-            time.sleep(1/count)
+            time.sleep(1.0/count)
             count += 1
 
 

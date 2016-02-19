@@ -58,7 +58,7 @@ def escalonada():
                 time.sleep(count)
                 GPIO.output(7,False)
                 time.sleep(count)
-            count -= 0.0002
+            count -= 0.00001
 
 
     except KeyboardInterrupt:

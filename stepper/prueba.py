@@ -50,7 +50,7 @@ def uno_en_n():
         print "Velocidad maxima = %s"%count        
 
 def escalonada():
-    count = 0.006
+    count = 0.001
     try:
         while True:
             for i in range(30):

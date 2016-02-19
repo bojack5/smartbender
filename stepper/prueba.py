@@ -19,6 +19,20 @@ def avance(velocidad , pasos,direccion):
     GPIO.output(8,True)
 
 def escalonada():
+    count = 0.006
+    try:
+        while True:
+            GPIO.output(7,True)
+            time.sleep(count)
+            GPIO.output(7,False)
+            time.sleep(count)
+            count -= 0.0002
+
+
+    except KeyboardInterrupt:
+        print "Velocidad maxima = %s"%count
+
+def lineal():
     count = 240
     try:
         while True:
@@ -30,7 +44,8 @@ def escalonada():
 
 
     except KeyboardInterrupt:
-        print "Velocidad maxima = %s"%count
+        print "Velocidad maxima = %s"%count        
+
 
 def rampa(pasos):
     cambio = 0.1/pasos

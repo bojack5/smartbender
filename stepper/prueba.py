@@ -18,7 +18,7 @@ def avance(velocidad , pasos,direccion):
         time.sleep(vel)
     GPIO.output(8,True)
 
-def escalonada(pasos):
+def escalonada():
     count = 240
     try:
         while True:

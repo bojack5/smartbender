@@ -65,7 +65,12 @@ class Doble(object):
 
     def entrar(self):
         self.pines.cero(self.pin2)
-        self.pines.uno(self.pin1)    
+        self.pines.uno(self.pin1)  
+
+    def reset(self):
+        self.pines.uno(self.pin1)
+        self.pines.uno(self.pin2)
+              
         
 		
 

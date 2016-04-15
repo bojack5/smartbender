@@ -1,22 +1,23 @@
+
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import time
 import math as m 
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(7,GPIO.OUT)
-GPIO.setup(8,GPIO.OUT)
+GPIO.setup(24,GPIO.OUT)
+GPIO.setup(23,GPIO.OUT)
 
 def avance(velocidad , pasos,direccion):
     vel = 1./velocidad
-    GPIO.output(8,direccion)
+    GPIO.output(23,direccion)
     for i in range(pasos):
-        GPIO.output(7,True)
+        GPIO.output(24,True)
         #print "Paso %s\n"%(i+1)
         time.sleep(vel)
-        GPIO.output(7,False)
+        GPIO.output(24,False)
         time.sleep(vel)
-    GPIO.output(8,True)
+    GPIO.output(23,True)
 
 def lineal():
     count = 0.0015

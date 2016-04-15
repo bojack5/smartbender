@@ -40,7 +40,7 @@ class Nema42(object):
         self.pin_pulse     = pin_pulse
 		
     def avance(self , direccion , velocidad):
-        GPIO.output(self.pin_direccion , direccion)
+        GPIO.output(self.pin_direccion , direccion , pasos)
         vel = 1./velocidad
 
     	for paso in xrange(0,pasos):

@@ -2,9 +2,9 @@
 import conf
 from stepper import Nema23 , Nema42
 def main():
-	#Definicion de pines desde archivo conf para Nema 42
-	direccion42   = conf.pines['nema42']['direccion']
-	pulso42       = conf.pines['nema42']['pulso']
+    #Definicion de pines desde archivo conf para Nema 42
+    direccion42   = conf.pines['nema42']['direccion']
+    pulso42       = conf.pines['nema42']['pulso']
     #Definicion de pines desde archivo conf para Nema 23
     enable23_1    = conf.pines['nema23-1']['enable']
     direccion23_1 = conf.pines['nema23-1']['direccion']

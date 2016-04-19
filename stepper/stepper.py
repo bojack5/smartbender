@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 class Nema23(object):
     """docstring for Nema23"""
     def __init__(self, pin_enable , pin_direccion , pin_pulse):
-        GPIO.setup(pin_enable,GPIO.OUT)
+       G PIO.setup(pin_enable,GPIO.OUT)
         GPIO.setup(pin_direccion,GPIO.OUT)
         GPIO.setup(pin_pulse,GPIO.OUT)
     	self.pin_enable    = pin_enable
@@ -49,7 +49,34 @@ class Nema42(object):
             GPIO.output(self.pin_pulse,True)
             time.sleep(vel)
 
-        GPIO.output(self.pin_direccion,True)    
+        GPIO.output(self.pin_direccion,True)
+
+    def vel2pulsos(self , velocidad , distancia):
+    	perimetro = 125.66370614359172 #mm
+    	pulsos = velocidad * 2000 / perimetro
+    	slp = 1./(2*pulsos)
+    	pasos = (distancia/perimetro)*2000
+    	print "Funcionando a una velocidad de %s mm/s \t a %s pulsos cada segundo."
+    	cuenta = 0
+    	try:
+            for i in xrange(0,pasos):
+                GPIO.output(self.pin_pulse,False)
+                cuenta += 1
+                time.sleep(slp)
+                GPIO.output(self.pin_pulse,True)
+                time.sleep(slp)
+            print "Se dieron %s pasos , deberian de ser %s " % (cuenta , pasos)    
+
+
+
+    	except KeyboardInterrupt:
+    		print "Terminado de girar"
+            GPIO.cleanup()
+
+
+
+
+
 
 
 

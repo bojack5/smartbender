@@ -33,18 +33,20 @@ class Senal(object):
             self.estado = 0    	
         print "Estado = %s" % self.estado
 
+def main():
+	try:
+	    while True:
+	        time.sleep(1)
 
+	except KeyboardInterrupt:
+	    GPIO.cleanup()
 
         
     
-
+if __name__ == '__main__':
+    main()
 		
-try:
-    while True:
-        time.sleep(1)
-
-except KeyboardInterrupt:
-    GPIO.cleanup()        
+        
 
 
 		

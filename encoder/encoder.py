@@ -8,7 +8,10 @@ class Senal(object):
     def __init__(self, pinA , pinB):
         self.pinA = pinA
         self.pinB = pinB
+        self.tiempo_actual = 0 
+        self.tiempo_anterior = time.time()
         self.estado = 0
+        self.perimetro = 40*m.pi
         GPIO.setup(self.pinA, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(self.pinB, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
@@ -18,13 +21,17 @@ class Senal(object):
         self.cuenta = 0 
 
     def interrupcionA(self , pin):
+        self.tiempo_actual = time.time()
     	if self.estado:
     	    self.cuenta += 1
 
     	if not self.estado:
     	    self.cuenta -= 1
+    	tiempo = self.tiempo_actual-self.tiempo_anterior
+    	self.tiempo_anterior  = self.tiempo_actual
+    	self.velocidad = (self.perimetro/1000)/tiempo   
 
-    	print "La cuenta va en %s " % self.cuenta
+    	print "La cuenta va en {cuenta} y la velocidad es {velocidad}".format(cuenta = self.cuenta , velocidad = self.velocidad)
 
     def interrupcionB(self , pin):
         if GPIO.input(self.pin):

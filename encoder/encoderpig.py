@@ -20,15 +20,15 @@ class Signal(object):
 
         #Definicion de funciones que correran al interrumpirse en los pines
         self.interrupcionA  = self.gpio.callback(self.pinA, edge = pigpio.FALLING_EDGE ,func = self.guia)
-        self.interrupcionB = self.gpio.callback(self.pinB, edge = pigpio.EITHER_EDGE , func = self.referencia)
+        #self.interrupcionB = self.gpio.callback(self.pinB, edge = pigpio.EITHER_EDGE , func = self.referencia)
         
 
     def guia(self,a,b,c):
         self.tiempo_actual = time.time()
-        if self.estado:
+        if int(self.gpio.read(pinB)):
         	self.cuenta += 1
 
-        if not self.estado:
+        if not int(self.gpio.read(pinB)):
             self.cuenta -= 1
 
         tiempo = self.tiempo_actual-self.tiempo_anterior
@@ -36,12 +36,7 @@ class Signal(object):
         self.velocidad = (self.perimetro/1000)/tiempo
         print "cuenta en %s" % self.cuenta    
 
-    def referencia(self,a,b,c):
-        if int(self.gpio.read(self.pinB)):
-            self.estado = 1
-        
-        if not int(self.gpio.read(self.pinB)):
-            self.estado = 0                         
+                       
 		
 def main():
     

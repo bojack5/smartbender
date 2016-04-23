@@ -19,8 +19,8 @@ class Signal(object):
         self.velocidad = 0
 
         #Definicion de funciones que correran al interrumpirse en los pines
-        self.interrupcionA  = gpio.callback(self.pinA, edge = pigpio.FALLING_EDGE ,func = self.guia)
-        self.interrupcionB = gpio.callback(self.pinB, edge = pigpio.EITHER_EDGE , func = self.referencia)
+        self.interrupcionA  = self.gpio.callback(self.pinA, edge = pigpio.FALLING_EDGE ,func = self.guia)
+        self.interrupcionB = self.gpio.callback(self.pinB, edge = pigpio.EITHER_EDGE , func = self.referencia)
         
 
     def guia(self):

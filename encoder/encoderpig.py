@@ -33,7 +33,8 @@ class Signal(object):
 
         tiempo = self.tiempo_actual-self.tiempo_anterior
         self.tiempo_anterior  = self.tiempo_actual
-        self.velocidad = (self.perimetro/1000)/tiempo    
+        self.velocidad = (self.perimetro/1000)/tiempo
+        print "cuenta en %s" % self.cuenta    
 
     def referencia(self,a,b,c):
         if int(self.gpio.read(self.pinB)):
@@ -49,7 +50,7 @@ def main():
     	while 1:
             time.sleep(1)		
     except KeyboardInterrupt:
-        pi.clear_bank_1(bin(2**20+2**21))
+        gpio.clear_bank_1(bin(2**20+2**21))
 
 if __name__ == '__main__':
     main()        

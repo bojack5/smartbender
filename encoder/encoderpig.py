@@ -25,10 +25,10 @@ class Signal(object):
 
     def guia(self,a,b,c):
         self.tiempo_actual = time.time()
-        if int(self.gpio.read(pinB)):
+        if int(self.gpio.read(self.pinB)):
         	self.cuenta += 1
 
-        if not int(self.gpio.read(pinB)):
+        if not int(self.gpio.read(self.pinB)):
             self.cuenta -= 1
 
         tiempo = self.tiempo_actual-self.tiempo_anterior

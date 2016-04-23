@@ -50,3 +50,6 @@ def main():
             time.sleep(1)		
     except KeyboardInterrupt:
         pi.clear_bank_1(bin(2**20+2**21))
+
+if __name__ == '__main__':
+    main()        

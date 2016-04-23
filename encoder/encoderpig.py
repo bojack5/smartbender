@@ -36,10 +36,10 @@ class Signal(object):
         self.velocidad = (self.perimetro/1000)/tiempo    
 
     def referencia(self,a,b,c):
-        if int(gpio.read(self.pinB)):
+        if int(self.gpio.read(self.pinB)):
             self.estado = 1
         
-        if not int(gpio.read(self.pinB)):
+        if not int(self.gpio.read(self.pinB)):
             self.estado = 0                         
 		
 def main():

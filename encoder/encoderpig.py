@@ -50,7 +50,7 @@ def main():
     	while 1:
             time.sleep(1)		
     except KeyboardInterrupt:
-        gpio.clear_bank_1(bin(2**20+2**21))
+        self.gpio.clear_bank_1(bin(2**20+2**21))
 
 if __name__ == '__main__':
     main()        

@@ -23,7 +23,7 @@ class Signal(object):
         self.interrupcionB = self.gpio.callback(self.pinB, edge = pigpio.EITHER_EDGE , func = self.referencia)
         
 
-    def guia(self):
+    def guia(self,a,b,c):
         self.tiempo_actual = time.time()
         if self.estado:
         	self.cuenta += 1
@@ -35,7 +35,7 @@ class Signal(object):
         self.tiempo_anterior  = self.tiempo_actual
         self.velocidad = (self.perimetro/1000)/tiempo    
 
-    def referencia(self):
+    def referencia(self,a,b,c):
         if int(gpio.read(self.pinB)):
             self.estado = 1
         

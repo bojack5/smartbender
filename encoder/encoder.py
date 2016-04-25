@@ -31,7 +31,7 @@ class Senal(object):
     	self.tiempo_anterior  = self.tiempo_actual
     	self.velocidad = (self.perimetro/1000)/tiempo   
 
-    	print "La cuenta va en {cuenta} y la velocidad es {velocidad}".format(cuenta = self.cuenta , velocidad = self.velocidad)
+    	#print "La cuenta va en {cuenta} y la velocidad es {velocidad}".format(cuenta = self.cuenta , velocidad = self.velocidad)
 
     def interrupcionB(self , pin):
         if GPIO.input(self.pin):
@@ -41,9 +41,12 @@ class Senal(object):
         print "Estado = %s" % self.estado
 
 def main():
+	encoder = Senal(21,20)
 	try:
 	    while True:
 	        time.sleep(1)
+	        print "La cuenta va en {cuenta} y la velocidad es {velocidad}".format(cuenta = encoder.cuenta , velocidad = encoder.velocidad)
+
 
 	except KeyboardInterrupt:
 	    GPIO.cleanup()

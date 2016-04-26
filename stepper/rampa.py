@@ -1,54 +1,72 @@
 #!/usr/bin/env python
 
-# ramp_frequency.py
-# 2016-01-21
-# Public Domain
-
 import time
+
 import pigpio
 
-def generate_ramp(GPIO, ramp):
-   l = len(ramp)
-   wid=[-1] * l
-   pi.set_mode(GPIO, pigpio.OUTPUT)
+START_DELAY=5000
+FINAL_DELAY=100
+STEP=100
 
-   # generate a wave per frequency
-
-   for i in range(l):
-      f = ramp[i][0]
-      micros = int(500000/f)
-      wf=[]
-      wf.append(pigpio.pulse(1<<GPIO, 0,       micros))
-      wf.append(pigpio.pulse(0,       1<<GPIO, micros))
-      pi.wave_add_generic(wf)
-      wid[i] = pi.wave_create()
-
-   # generate a chain of waves
-
-   chain = []
-
-   for i in range(l):
-      steps = ramp[i][1]
-      x = steps & 255
-      y = steps >> 8
-      chain += [255, 0, wid[i], 255, 1, x, y]
-
-   print(chain)
-
-   pi.wave_chain(chain) # Transmit chain.
-
-   while pi.wave_tx_busy(): # While transmitting.
-      time.sleep(0.1)
-
-   # delete all waves
-   for i in range(l):
-      pi.wave_delete(wid[i])
+GPIO=26
 
 pi = pigpio.pi()
 
-if not pi.connected:
-   exit(0)
+pi.set_mode(GPIO, pigpio.OUTPUT)
 
-generate_ramp(26, [[5000, 1000], [10000, 2000], [20000, 60000]])
+pi.wave_clear()
+
+# short waveform to repeat final speed
+
+wf=[]
+
+wf.append(pigpio.pulse(1<<GPIO, 0,       FINAL_DELAY))
+wf.append(pigpio.pulse(0,       1<<GPIO, FINAL_DELAY))
+
+pi.wave_add_generic(wf)
+
+wid0 = pi.wave_create()
+
+# build initial ramp
+
+wf=[]
+
+for delay in range(START_DELAY, FINAL_DELAY, -STEP):
+   wf.append(pigpio.pulse(1<<GPIO, 0,       delay))
+   wf.append(pigpio.pulse(0,       1<<GPIO, delay))
+
+pi.wave_add_generic(wf)
+
+# add lots of pulses at final rate to give timing lee-way
+
+wf=[]
+
+# add after existing pulses
+
+offset = pi.wave_get_micros()
+
+print("ramp is {} micros".format(offset))
+
+wf.append(pigpio.pulse(0, 0, offset))
+
+for i in range(2000):
+   wf.append(pigpio.pulse(1<<GPIO, 0,       FINAL_DELAY))
+   wf.append(pigpio.pulse(0,       1<<GPIO, FINAL_DELAY))
+
+pi.wave_add_generic(wf)
+
+wid1 = pi.wave_create()
+
+# send ramp, stop when final rate reached
+
+pi.wave_send_once(wid1)
+
+time.sleep(float(offset)/1000000.0) # make sure it's a float
+
+pi.wave_send_repeat(wid0)
+
+time.sleep(1)
+
+pi.wave_tx_stop()
 
 pi.stop()

@@ -83,7 +83,7 @@ class Nema42(object):
 
 
     	except KeyboardInterrupt:
-    		print "Terminado de girar"
+            print "Terminado de girar"
             GPIO.cleanup()
 
 

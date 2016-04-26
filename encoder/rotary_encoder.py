@@ -118,6 +118,7 @@ if __name__ == "__main__":
    pos = 0
    tiempo_actual = 0
    tiempo_anterior = time.time()
+   velocidad = 0
    def callback(way):
       
       global pos

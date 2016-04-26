@@ -4,7 +4,7 @@ import pigpio
 
 class decoder:
 
-   """Class to decode mechanical rotary encoder pulses."""
+   """Clase para decodificar los pulsos de un encoder mecanico."""
 
    def __init__(self, pi, gpioA, gpioB, callback):
 
@@ -49,6 +49,9 @@ class decoder:
       self.gpioA = gpioA
       self.gpioB = gpioB
       self.callback = callback
+      self.velocidad = 0
+      self.tiempo_anterior = 0
+      self.tiempo actual = time.time()
 
       self.levA = 0
       self.levB = 0
@@ -114,14 +117,22 @@ if __name__ == "__main__":
    import rotary_encoder
 
    pos = 0
-
+   tiempo_actual = 0
+   tiempo_anterior = time.time()
    def callback(way):
-
+      
       global pos
-
+      global tiempo_anterior
+      global tiempo_actual
+      tiempo_actual = time.time()
       pos -= way
+      tiempo = tiempo_actual - tiempo_anterior
+      velocidad = 0.06283185307179587/tiempo
+      tiempo_anterior = tiempo_actual
 
-      print("pos={}".format(pos))
+
+
+      print("pos={0} vel={1}".format(pos,velocidad))
 
    pi = pigpio.pi()
 

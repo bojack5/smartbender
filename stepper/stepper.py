@@ -38,6 +38,16 @@ class Nema42(object):
         GPIO.setup(pin_direccion,GPIO.OUT)
         self.pin_direccion = pin_direccion
         self.pin_pulse     = pin_pulse
+
+    def ts_2_freq(self , ts ):
+        #GPIO.output(self.pin_direccion , direccion)
+        GPIO.output(self.pin_pulse,False)
+        time.sleep(ts)
+        GPIO.output(self.pin_pulse,True)
+        time.sleep(ts)
+            
+
+            
 		
     def avance(self , direccion , velocidad , pasos):
         GPIO.output(self.pin_direccion , direccion)
@@ -74,7 +84,10 @@ class Nema42(object):
             GPIO.cleanup()
 
 
-
+if __name__ == '__main__':
+    traccion = Nema42(19,26)
+    for i in xrange(1,1000000):
+        traccion.ts_2_freq(i/1000000)
 
 
 

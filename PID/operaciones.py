@@ -47,6 +47,9 @@ class Nema42(object):
         return ts
 
 
+            
+
+
         
         
 def pulsos2vel():

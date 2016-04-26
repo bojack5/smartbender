@@ -131,13 +131,16 @@ if __name__ == "__main__":
 
 
 
-      print("pos={0} vel={1} , tiempo{2}".format(pos,velocidad,tiempo))
+      
 
    pi = pigpio.pi()
 
    decoder = rotary_encoder.decoder(pi, 21, 20, callback)
+   while 1:
 
-   time.sleep(300)
+      time.sleep(1)
+      print("pos={0} vel={1} , tiempo{2}".format(pos,velocidad,tiempo))
+
 
    decoder.cancel()
 

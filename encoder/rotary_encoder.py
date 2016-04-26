@@ -131,7 +131,7 @@ if __name__ == "__main__":
 
 
 
-      print("pos={0} vel={1} , tiempo={1}".format(pos,velocidad,tiempo))
+      print("pos={0} vel={1} , tiempo_actual={2} , tiempo_anterior{3}".format(pos,velocidad,tiempo_actual,tiempo_anterior)
 
    pi = pigpio.pi()
 

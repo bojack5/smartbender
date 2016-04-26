@@ -117,11 +117,13 @@ if __name__ == "__main__":
    pos = 0
    tiempo_actual = 0
    tiempo_anterior = time.time()
+   velocidad = 0
    def callback(way):
       
       global pos
       global tiempo_anterior
       global tiempo_actual
+      global velocidad
       tiempo_actual = time.time()
       pos -= way
       tiempo = tiempo_actual - tiempo_anterior

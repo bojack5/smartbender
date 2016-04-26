@@ -50,8 +50,7 @@ class decoder:
       self.gpioB = gpioB
       self.callback = callback
       self.velocidad = 0
-      self.tiempo_anterior = 0
-      self.tiempo actual = time.time()
+      
 
       self.levA = 0
       self.levB = 0

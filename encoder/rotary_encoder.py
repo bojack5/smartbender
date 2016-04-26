@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
       global pos
 
-      pos += way
+      pos -= way
 
       print("pos={}".format(pos))
 

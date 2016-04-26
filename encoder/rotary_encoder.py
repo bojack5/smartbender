@@ -118,13 +118,11 @@ if __name__ == "__main__":
    pos = 0
    tiempo_actual = 0
    tiempo_anterior = time.time()
-   velocidad = 0
    def callback(way):
       
       global pos
       global tiempo_anterior
       global tiempo_actual
-      global velocidad
       tiempo_actual = time.time()
       pos -= way
       tiempo = tiempo_actual - tiempo_anterior
@@ -133,16 +131,14 @@ if __name__ == "__main__":
 
 
 
-      
+      print("pos={0} vel={1} , tiempo{2}".format(pos,velocidad,tiempo))
 
    pi = pigpio.pi()
 
    decoder = rotary_encoder.decoder(pi, 21, 20, callback)
    while 1:
 
-      time.sleep(1)
-      print("pos={0} vel={1}".format(pos,velocidad))
-
+      time.sleep(300)
 
    decoder.cancel()
 

@@ -4,7 +4,7 @@ import time
 
 import pigpio
 
-START_DELAY=5000
+START_DELAY=4000
 FINAL_DELAY=100
 STEP=100
 

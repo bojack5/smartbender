@@ -141,7 +141,7 @@ if __name__ == "__main__":
    while 1:
 
       time.sleep(1)
-      print("pos={0} vel={1} , tiempo{2}".format(pos,velocidad,tiempo))
+      print("pos={0} vel={1}".format(pos,velocidad))
 
 
    decoder.cancel()

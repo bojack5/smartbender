@@ -90,7 +90,7 @@ class Nema42(object):
 if __name__ == '__main__':
     traccion = Nema42(19,26)
     for i in xrange(1,1000000):
-        traccion.ts_2_freq(i/1000000)
+        traccion.ts_2_freq(i/1000000.)
 
 
 

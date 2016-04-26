@@ -123,6 +123,7 @@ if __name__ == "__main__":
       global pos
       global tiempo_anterior
       global tiempo_actual
+      global velocidad
       tiempo_actual = time.time()
       pos -= way
       tiempo = tiempo_actual - tiempo_anterior

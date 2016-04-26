@@ -1,3 +1,4 @@
+#!/usr/bin/env pyton
 import pigpio
 
 class decoder:

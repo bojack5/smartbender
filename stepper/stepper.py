@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 class Nema23(object):
     """docstring for Nema23"""
     def __init__(self, pin_enable , pin_direccion , pin_pulse):
-       G PIO.setup(pin_enable,GPIO.OUT)
+        GPIO.setup(pin_enable,GPIO.OUT)
         GPIO.setup(pin_direccion,GPIO.OUT)
         GPIO.setup(pin_pulse,GPIO.OUT)
     	self.pin_enable    = pin_enable

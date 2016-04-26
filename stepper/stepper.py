@@ -41,10 +41,13 @@ class Nema42(object):
 
     def ts_2_freq(self , ts ):
         #GPIO.output(self.pin_direccion , direccion)
-        GPIO.output(self.pin_pulse,False)
-        time.sleep(ts)
-        GPIO.output(self.pin_pulse,True)
-        time.sleep(ts)
+        print("Funcionando con Ts={}".format(ts))
+        for i in xrange(0,100):
+
+            GPIO.output(self.pin_pulse,False)
+            time.sleep(ts)
+            GPIO.output(self.pin_pulse,True)
+            time.sleep(ts)
             
 
             

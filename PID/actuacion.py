@@ -7,7 +7,7 @@ class Actuacion(object):
     def __init__(self , gpio):
         self.gpio = gpio
         self.pi = pigpio.pi()
-        self.pi.set_mode(GPIO, pigpio.OUTPUT);
+        self.pi.set_mode(self.gpio, pigpio.OUTPUT);
 
     def ts_2_actuacion(self , tus):
         self.pi.wave_clear()
@@ -16,7 +16,7 @@ class Actuacion(object):
             pigpio.pulse(1<<self.gpio,0,tus),])
         wid = pi.wave_create();
         self.pi.wave_send_repeat(wid)
-        
+
         
 
 """GPIO=26

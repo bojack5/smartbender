@@ -14,7 +14,7 @@ class Actuacion(object):
         self.pi.wave_add_generic([
             pigpio.pulse(0,1<<self.gpio,tus),
             pigpio.pulse(1<<self.gpio,0,tus),])
-        wid = pi.wave_create();
+        wid = self.pi.wave_create();
         self.pi.wave_send_repeat(wid)
 
         

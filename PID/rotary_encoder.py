@@ -7,43 +7,6 @@ class decoder:
 
    def __init__(self, pi, gpioA, gpioB, callback):
 
-      """
-      Instantiate the class with the pi and gpios connected to
-      rotary encoder contacts A and B.  The common contact
-      should be connected to ground.  The callback is
-      called when the rotary encoder is turned.  It takes
-      one parameter which is +1 for clockwise and -1 for
-      counterclockwise.
-
-      EXAMPLE
-
-      import time
-      import pigpio
-
-      import rotary_encoder
-
-      pos = 0
-
-      def callback(way):
-
-         global pos
-
-         pos += way
-
-         print("pos={}".format(pos))
-
-      pi = pigpio.pi()
-
-      decoder = rotary_encoder.decoder(pi, 7, 8, callback)
-
-      time.sleep(300)
-
-      decoder.cancel()
-
-      pi.stop()
-
-      """
-
       self.pi = pi
       self.gpioA = gpioA
       self.gpioB = gpioB
@@ -115,20 +78,20 @@ if __name__ == "__main__":
    import rotary_encoder
 
    pos = 0
-   tiempo_actual = 0
-   tiempo_anterior = time.time()
+   actual_time = 0
+   past_time = time.time()
    velocidad = 0
    def callback(way):
       
       global pos
-      global tiempo_anterior
+      global past_time
       global tiempo_actual
       global velocidad
-      tiempo_actual = time.time()
+      actual_time = time.time()
       pos -= way
-      tiempo = tiempo_actual - tiempo_anterior
-      velocidad = 0.06283185307179587/tiempo
-      tiempo_anterior = tiempo_actual
+      time = actual_time - past_time
+      velocidad = 0.06283185307179587/time #linear movement of machine from each step of stepper motor
+      past_time = actual_time
 
 
 

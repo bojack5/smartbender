@@ -1,8 +1,25 @@
 import time
 import pigpio
 import math as m 
-    
-GPIO=26
+
+class Actuacion(object):
+    """docstring for Actuacion"""
+    def __init__(self , gpio):
+        self.gpio = gpio
+        self.pi = pigpio.pi()
+        self.pi.set_mode(GPIO, pigpio.OUTPUT);
+
+    def ts_2_actuacion(self , tus):
+        self.pi.wave_clear()
+        self.pi.wave_add_generic([
+            pigpio.pulse(0,1<<self.gpio,tus),
+            pigpio.pulse(1<<self.gpio,0,tus),])
+        wid = pi.wave_create();
+        self.pi.wave_send_repeat(wid)
+        
+        
+
+"""GPIO=26
 velocidad = input('velocidad deseada (mm/s): ')
 wid = [0]*10
 perimetro = 40*m.pi
@@ -61,5 +78,5 @@ while pi.wave_tx_busy():
 for wave in wid: 
     pi.wave_delete(wave)
  
-pi.stop()
+pi.stop()"""
  

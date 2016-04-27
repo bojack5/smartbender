@@ -12,7 +12,7 @@ pi.set_mode(GPIO, pigpio.OUTPUT);
  
 for i in range(WAVES):
    pi.wave_add_generic([
-      pigpio.pulse(1<<GPIO, 0, 20),
+      pigpio.pulse(1<<GPIO, 0, 200),
       pigpio.pulse(0, 1<<GPIO, (i+1)*200)]);
       
    wid[i] = pi.wave_create();

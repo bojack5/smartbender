@@ -1,45 +1,65 @@
 import time
 import pigpio
+import math as m 
     
-WAVES=5
 GPIO=26
-       
-wid=[0]*WAVES
-       
+velocidad = input('velocidad deseada (mm/s): ')
+wid = [0]*10
+perimetro = 40*m.pi
+dist_p_paso = perimetro/2000
+pulsos = velocidad/dist_p_paso
+print pulsos
+num_ts = 2*pulsos
+ts = 1./num_ts       
+us = ts*1000000       
 pi = pigpio.pi() # Connect to local Pi.
-       
+print ts       
 pi.set_mode(GPIO, pigpio.OUTPUT);
- 
-for i in range(WAVES):
-   pi.wave_add_generic([
-      pigpio.pulse(1<<GPIO, 0, 200),
-      pigpio.pulse(0, 1<<GPIO, (i+1)*200)]);
+for i in range(10):
+    pi.wave_add_generic([
+       pigpio.pulse(0,1<<GPIO,us*(10-(i))),
+       pigpio.pulse(1<<GPIO,0,us*(10-(i)))]);
       
-   wid[i] = pi.wave_create();
+    wid[i] = pi.wave_create();
        
 pi.wave_chain([
-   wid[4], wid[3], wid[2],       # transmit waves 4+3+2
-   255, 0,                       # loop start
-      wid[0], wid[0], wid[0],    # transmit waves 0+0+0
-      255, 0,                    # loop start
-         wid[0], wid[1],         # transmit waves 0+1
-         255, 2, 0x88, 0x13,     # delay 5000us
-      255, 1, 30, 0,             # loop end (repeat 30 times)
-      255, 0,                    # loop start
-         wid[2], wid[3], wid[0], # transmit waves 2+3+0
-         wid[3], wid[1], wid[2], # transmit waves 3+1+2
-      255, 1, 10, 0,             # loop end (repeat 10 times)
-   255, 1, 5, 0,                 # loop end (repeat 5 times)
-   wid[4], wid[4], wid[4],       # transmit waves 4+4+4
-   255, 2, 0x20, 0x4E,           # delay 20000us
-   wid[0], wid[0], wid[0],       # transmit waves 0+0+0
+    255, 0,                       # loop start
+    wid[0], 
+    255, 1, 3, 0, 
+    255, 0,                       # loop start
+    wid[1],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[2],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[3],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[4],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[5],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[6],
+    255, 1, 3, 0,
+    255, 0,                       # loop start
+    wid[7],
+    255, 1, 10, 0,
+    255, 0,                       # loop start
+    wid[8],
+    255, 1, 3, 0,
+    255,0,
+    wid[9],    
+    255,1,255,0
+
    ])
       
 while pi.wave_tx_busy():
-   time.sleep(0.1);
- 
-for i in range(WAVES):
-   pi.wave_delete(wid[i])
+    time.sleep(0.1);
+for wave in wid: 
+    pi.wave_delete(wave)
  
 pi.stop()
  

@@ -5,19 +5,19 @@ import time
 import math as m 
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(24,GPIO.OUT)
-GPIO.setup(23,GPIO.OUT)
+GPIO.setup(20,GPIO.OUT)
+GPIO.setup(21,GPIO.OUT)
 
 def avance(velocidad , pasos,direccion):
     vel = 1./velocidad
-    GPIO.output(23,direccion)
+    GPIO.output(20,direccion)
     for i in range(pasos):
-        GPIO.output(24,True)
-        #print "Paso %s\n"%(i+1)
+        GPIO.output(21,True)
+        print "Paso %s\n"%(i+1)
         time.sleep(vel)
-        GPIO.output(24,False)
+        GPIO.output(21,False)
         time.sleep(vel)
-    GPIO.output(23,True)
+    GPIO.output(20,True)
 
 def lineal():
     count = 0.0015
@@ -89,4 +89,4 @@ def rampa(pasos):
 #        time.sleep(vel)
 
 
-#avance(4000,400,1)
+avance(1000,2000,0)

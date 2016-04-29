@@ -1,96 +1,56 @@
 #!/usr/bin/env python
-import RPi.GPIO as GPIO
-import time
-import math as m 
-
-GPIO.setmode(GPIO.BCM)
-
+import pigpio
 
 class Nema23(object):
     """docstring for Nema23"""
     def __init__(self, pin_enable , pin_direccion , pin_pulse):
-        GPIO.setup(pin_enable,GPIO.OUT)
-        GPIO.setup(pin_direccion,GPIO.OUT)
-        GPIO.setup(pin_pulse,GPIO.OUT)
-    	self.pin_enable    = pin_enable
-    	self.pin_direccion = pin_direccion
-    	self.pin_pulse     = pin_pulse
+        self.pin_direccion = pin_direccion
+        self.pin_pulse     = pin_pulse
+        self.pin_enable    = pin_enable
+        self.pi = pigpio.pi()
+        self.pi.set_mode(self.pin_direccion, pigpio.OUTPUT)
+        self.pi.set_mode(self.pin_pulse, pigpio.OUTPUT)
+        self.pi.set_mode(self.pin_enable, pigpio.OUTPUT)
 
-    def avance(self , direccion , pasos , velocidad):
-    	GPIO.output(self.pin_enable,False)
-    	GPIO.output(self.pin_direccion , direccion)
-    	vel = 1./velocidad
+    def avance(self , tus ,direccion ):
+    	self.pi.wave_clear()
+        self.pi.wave_add_generic([
+            pigpio.pulse(0,1<<self.pin_pulse,tus),
+            pigpio.pulse(1<<self.pin_pulse,0,tus),])
+        wid = self.pi.wave_create()
+        self.pi.write(self.pin_enable , 0)
+        self.pi.wave_send_repeat(wid)
 
-    	for paso in xrange(0,pasos):
-            GPIO.output(self.pin_pulse,False)
-            time.sleep(vel)
-            GPIO.output(self.pin_pulse,True)
-            time.sleep(vel)
-
-        GPIO.output(self.pin_enable,True)
-        GPIO.output(self.pin_direccion,True)
+    def parar(self):
+        self.pi.write(self.pin_enable , 1)
+        self.pi.wave_tx_stop()    
 
 
 class Nema42(object):
     """docstring for Nema42"""
     def __init__(self, pin_direccion , pin_pulse):
-        GPIO.setup(pin_pulse,GPIO.OUT)
-        GPIO.setup(pin_direccion,GPIO.OUT)
         self.pin_direccion = pin_direccion
         self.pin_pulse     = pin_pulse
+        self.pi = pigpio.pi()
+        self.pi.set_mode(self.pin_direccion, pigpio.OUTPUT)
+        self.pi.set_mode(self.pin_pulse, pigpio.OUTPUT)
 
-    def ts_2_freq(self , ts ):
-        #GPIO.output(self.pin_direccion , direccion)
-        print("Funcionando con Ts={}".format(ts))
-        for i in xrange(0,1):
+    def avance(self , tus , direccion):
+        self.pi.wave_clear()
+        self.pi.wave_add_generic([
+            pigpio.pulse(0,1<<self.pin_pulse,tus),
+            pigpio.pulse(1<<self.pin_pulse,0,tus),])
+        wid = self.pi.wave_create()
+        self.pi.wave_send_repeat(wid)
 
-            GPIO.output(self.pin_pulse,False)
-            time.sleep(ts)
-            GPIO.output(self.pin_pulse,True)
-            time.sleep(ts)
+    def parar(self):
+        self.pi.wave_tx_stop()
             
 
-            
-		
-    def avance(self , direccion , velocidad , pasos):
-        GPIO.output(self.pin_direccion , direccion)
-        vel = 1./velocidad
-
-    	for paso in xrange(0,pasos):
-            GPIO.output(self.pin_pulse,False)
-            time.sleep(vel)
-            GPIO.output(self.pin_pulse,True)
-            time.sleep(vel)
-
-        GPIO.output(self.pin_direccion,True)
-
-    def vel2pulsos(self , velocidad , distancia):
-    	perimetro = 125.66370614359172 #mm
-    	pulsos = velocidad * 2000 / perimetro
-    	slp = 1./(2*pulsos)
-    	pasos = (distancia/perimetro)*2000
-    	print "Funcionando a una velocidad de %s mm/s \t a %s pulsos cada segundo."
-    	cuenta = 0
-    	try:
-            for i in xrange(0,pasos):
-                GPIO.output(self.pin_pulse,False)
-                cuenta += 1
-                time.sleep(slp)
-                GPIO.output(self.pin_pulse,True)
-                time.sleep(slp)
-            print "Se dieron %s pasos , deberian de ser %s " % (cuenta , pasos)    
 
 
 
-    	except KeyboardInterrupt:
-            print "Terminado de girar"
-            GPIO.cleanup()
-
-
-if __name__ == '__main__':
-    traccion = Nema42(19,26)
-    for i in xrange(1000,1,-1):
-        traccion.ts_2_freq(0.005)
+    
 
 
 

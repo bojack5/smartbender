@@ -1,54 +1,18 @@
 #!/usr/bin/env python
-
 import pigpio
 
 class decoder:
 
-   """Class to decode mechanical rotary encoder pulses."""
+   """Clase para decodificar los pulsos de un encoder mecanico."""
 
    def __init__(self, pi, gpioA, gpioB, callback):
-
-      """
-      Instantiate the class with the pi and gpios connected to
-      rotary encoder contacts A and B.  The common contact
-      should be connected to ground.  The callback is
-      called when the rotary encoder is turned.  It takes
-      one parameter which is +1 for clockwise and -1 for
-      counterclockwise.
-
-      EXAMPLE
-
-      import time
-      import pigpio
-
-      import rotary_encoder
-
-      pos = 0
-
-      def callback(way):
-
-         global pos
-
-         pos += way
-
-         print("pos={}".format(pos))
-
-      pi = pigpio.pi()
-
-      decoder = rotary_encoder.decoder(pi, 7, 8, callback)
-
-      time.sleep(300)
-
-      decoder.cancel()
-
-      pi.stop()
-
-      """
 
       self.pi = pi
       self.gpioA = gpioA
       self.gpioB = gpioB
       self.callback = callback
+      self.velocidad = 0
+      
 
       self.levA = 0
       self.levB = 0
@@ -111,24 +75,38 @@ if __name__ == "__main__":
    import time
    import pigpio
 
-   import rotary_og
+   import rotary_encoder
 
    pos = 0
-
+   actual_time = 0
+   past_time = time.time()
+   velocidad = 0
    def callback(way):
-
+      
       global pos
+      global past_time
+      global tiempo_actual
+      global velocidad
+      actual_time = time.time()
+      pos -= way
+      time = actual_time - past_time
+      velocidad = 0.06283185307179587/time #linear movement of machine from each step of stepper motor
+      past_time = actual_time
 
-      pos += way
 
-      print("pos={}".format(pos))
+
+      
 
    pi = pigpio.pi()
 
-   decoder = rotary_og.decoder(pi, 21, 20, callback)
+   decoder = rotary_encoder.decoder(pi, 21, 20, callback)
+   while 1:
 
-   time.sleep(300)
+      time.sleep(1)
+      print("pos={0} vel={1}".format(pos,velocidad))
+
 
    decoder.cancel()
 
    pi.stop()
+

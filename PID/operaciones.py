@@ -44,7 +44,7 @@ class Nema42(object):
         num_pulsos = velocidad/self.dist_x_pulso
         ts = 1./(2*num_pulsos)
 
-        return ts
+        return ts*1000000
 
 
             

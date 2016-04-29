@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import PID.pid.PID as PID
-import stepper.stepper.Nema42 as Nema42
-import encoder.rotary_encoder as Encoder
+from PID.pid import PID as PID
+from  stepper.stepper import Nema42
+from encoder.rotary_encoder import decoder as Encoder
 import PID.operaciones as funciones

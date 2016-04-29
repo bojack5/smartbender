@@ -33,8 +33,10 @@ class PID_Velocidad(object):
         self.motor.avance(self.funciones.ts_from_vel(self.velocidad)+self.funciones.ts_from_vel(self.error),0) # suma de error de velocidad y set point , asi como su actuacion 
     
     def SetPoint(self , setpoint):
-    	
+
         self.pid.setPoint(setpoint)
+        ts = self.funciones.ts_from_vel(setpoint)
+        self.motor.avance(ts,0)
 
     
 

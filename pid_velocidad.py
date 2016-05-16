@@ -9,19 +9,18 @@ import time
 
 class PID_Velocidad(object):
     """Clase que ejecuta un PID de velocidad en la maquina dobladora"""
-	def __init__(self , Kp , ki , kd):
-		self.pid = PID(kp , ki , kd)
-		self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
-		
-		self.pi = pigpio.pi()
-		self.encoder       = Encoder(self.pi,conf2.pines['encoder']['A'] ,
-			                                 conf2.pines['encoder']['B'] ,
-			                                 self.interrupcion ,)
-		self.funciones     = funciones
-		self.tiempo_actual = 0
-		self.tiempo_pasado = time.time()
-		self.velocidad     = 0
-		self.posicion      = 0
+    def __init__(self , Kp , ki , kd):
+        self.pid = PID(kp , ki , kd)
+        self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
+        self.pi = pigpio.pi()
+        self.encoder       = Encoder(self.pi,conf2.pines['encoder']['A'] ,
+                                  conf2.pines['encoder']['B'] ,
+                                 self.interrupcion ,)
+        self.funciones     = funciones
+        self.tiempo_actual = 0
+        self.tiempo_pasado = time.time()
+        self.velocidad     = 0
+        self.posicion      = 0
 
     def interrupcion(self , direccion):
     	self.tiempo_actual = time.time()

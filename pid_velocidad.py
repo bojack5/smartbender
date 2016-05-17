@@ -14,8 +14,7 @@ class PID_Velocidad(object):
         self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
         self.pi = pigpio.pi()
         self.encoder       = Encoder(self.pi,conf2.pines['encoder']['A'] ,
-                                  conf2.pines['encoder']['B'] ,
-                                 self.interrupcion ,)
+                                  conf2.pines['encoder']['B'] ,)
         self.funciones_Nema42 = funciones.Nema42()
         self.tiempo_actual    = 0
         self.tiempo_pasado    = time.time()

@@ -9,7 +9,7 @@ import time
 
 class PID_Velocidad(object):
     """Clase que ejecuta un PID de velocidad en la maquina dobladora"""
-    def __init__(self , Kp , ki , kd):
+    def __init__(self , kp , ki , kd):
         self.pid = PID(kp , ki , kd)
         self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
         self.pi = pigpio.pi()

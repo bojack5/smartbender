@@ -1,20 +1,19 @@
 #!/usr/bin/env python
-import pigpio
 import time
+import pigpio
 
 class decoder:
 
-   """Clase para decodificar los pulsos de un encoder mecanico."""
+   """Class to decode mechanical rotary encoder pulses."""
 
-   def __init__(self, pi, gpioA, gpioB, callback):
+   def __init__(self, pi, gpioA, gpioB,):
+
 
       self.pi = pi
       self.gpioA = gpioA
       self.gpioB = gpioB
-      self.callback = callback
-      self.velocidad = 0
+      #self.callback = callback
       
-
       self.levA = 0
       self.levB = 0
 
@@ -28,6 +27,22 @@ class decoder:
 
       self.cbA = self.pi.callback(gpioA, pigpio.EITHER_EDGE, self._pulse)
       self.cbB = self.pi.callback(gpioB, pigpio.EITHER_EDGE, self._pulse)
+      """VARIABLES DE INTERRUPCION"""
+      self.pos = 0
+      self.tiempo_pasado = time.time()
+      self.tiempo_actual = 0
+      self.velocidad = 0
+      
+
+   def callback(self,way):
+
+      self.tiempo_actual = time.time()
+      self.pos += way
+      tiempo = self.tiempo_actual - self.tiempo_pasado
+      self.velocidad = 0.12566370614359174/tiempo
+      self.tiempo_pasado = self.tiempo_actual
+
+      print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
 
    def _pulse(self, gpio, level, tick):
 
@@ -75,36 +90,23 @@ if __name__ == "__main__":
 
    import pigpio
 
-   import rotary_encoder
+   import rotary_encoder2
 
    pos = 0
-   actual_time = 0
-   past_time = time.time()
-   velocidad = 0
+
    def callback(way):
-      
+
       global pos
-      global past_time
-      global tiempo_actual
-      global velocidad
-      actual_time = time.time()
-      pos -= way
-      time = actual_time - past_time
-      velocidad = 0.06283185307179587/time #linear movement of machine from each step of stepper motor
-      past_time = actual_time
 
+      pos += way
 
-
-      
+      print("pos={}".format(pos))
 
    pi = pigpio.pi()
 
-   decoder = rotary_encoder.decoder(pi, 6, 13, callback)
-   while 1:
+   decoder = rotary_encoder2.decoder(pi, 6, 13,)
 
-      time.sleep(1)
-      print("pos={0} vel={1}".format(pos,velocidad))
-
+   time.sleep(300)
 
    decoder.cancel()
 

@@ -36,6 +36,7 @@ class Nema42(object):
         self.pi.set_mode(self.pin_pulse, pigpio.OUTPUT)
 
     def avance(self , tus , direccion):
+        self.pi.write(self.pin_direccion , direccion)
         self.pi.wave_clear()
         self.pi.wave_add_generic([
             pigpio.pulse(0,1<<self.pin_pulse,tus),

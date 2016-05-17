@@ -36,11 +36,12 @@ class PID_Velocidad(object):
         self.motor.avance(self.funciones.ts_from_vel(self.velocidad-self.error),self.direccion_motor) # suma de error de velocidad y set point , asi como su actuacion 
     
     def SetPoint(self , setpoint):
-        
+        if self.velocidad < 0: self.direccion_motor = 1
+        else : self.direccion_motor = 0
         self.pid.setPoint(setpoint)
 
         ts = self.funciones_Nema42.ts_from_vel(setpoint)
-        self.motor.avance(ts,0)
+        self.motor.avance(ts,self.direccion_motor)
 
     
 

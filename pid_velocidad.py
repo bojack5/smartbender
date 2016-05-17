@@ -22,17 +22,6 @@ class PID_Velocidad(object):
         self.posicion         = 0
         self.direccion_motor  = 0
 
-    def interrupcion(self , direccion):
-
-    	self.tiempo_actual = time.time()
-    	self.posicion     -= direccion
-    	tiempo             = self.tiempo_actual - self.tiempo_pasado
-    	self.velocidad     = 0.06283185307179587/time #linear movement of machine from each step of stepper motor
-        self.tiempo_pasado = self.tiempo_actual
-        error              = self.pid.update(self.velocidad)
-        if self.velocidad < 0: self.direccion_motor = 1
-        else : self.direccion_motor = 0
-        self.motor.avance(self.funciones.ts_from_vel(self.velocidad-self.error),self.direccion_motor) # suma de error de velocidad y set point , asi como su actuacion 
     
     def SetPoint(self , setpoint):
         if self.velocidad < 0: self.direccion_motor = 1

@@ -47,7 +47,7 @@ class decoder:
       self.tiempo_pasado = self.tiempo_actual
       #self.archivo.write(velocidad)
 
-      print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
+      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
 
    def _pulse(self, gpio, level, tick):
 

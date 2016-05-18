@@ -28,7 +28,7 @@ class PID_Velocidad(object):
         else : self.direccion_motor = 0
         self.pid.setPoint(abs(setpoint))
 
-        ts = self.funciones_Nema42.ts_from_vel(setpoint)
+        ts = self.funciones_Nema42.ts_from_vel(abs(setpoint))
         self.motor.avance(ts,self.direccion_motor)
 
     

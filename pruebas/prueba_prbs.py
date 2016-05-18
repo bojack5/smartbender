@@ -25,7 +25,7 @@ def main():
     if(DEBUG):print header
     if(FILE):f.write(header+"\n")
 
-    while (1):
+    while (contador < 10000):
     	#dato = prbs()
     	print contador%6
         if not contador%6:

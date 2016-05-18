@@ -2,7 +2,7 @@
 import sys
 
 from random import choice
-vel_max = 400
+vel_max = 40
 
 def prbs():
     while True:

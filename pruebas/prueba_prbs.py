@@ -31,7 +31,7 @@ def main():
             valor_prbs = prbs()
             pid.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs
-        velocidad = pid.velocidad
+        velocidad = pid.encoder.velocidad
     	body = FORMATO_VALORES % (contador , valor_prbs , velocidad)
         
     	if(DEBUG): print body
@@ -42,4 +42,5 @@ def main():
 try:
     main()    	
 finally:
+    pid.motor.parar()
     f.close()

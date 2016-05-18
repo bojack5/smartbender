@@ -42,7 +42,7 @@ class decoder:
       self.tiempo_actual = time.time()
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado
-      self.velocidad = 0.12566370614359174/tiempo#np.append(self.velocidad , 0.12566370614359174/tiempo)
+      self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
       #self.velocidad.delete(0)
       self.tiempo_pasado = self.tiempo_actual
       #self.archivo.write(velocidad)

@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = "datos_prbs2s.log"
+filename = "datos_prbs3s.log"
 
 with open(filename) as f:
     header = f.readline().split("\t")

@@ -24,9 +24,9 @@ class PID_Velocidad(object):
 
     
     def SetPoint(self , setpoint):
-        if self.velocidad < 0: self.direccion_motor = 1
+        if setpoint < 0: self.direccion_motor = 1
         else : self.direccion_motor = 0
-        self.pid.setPoint(setpoint)
+        self.pid.setPoint(abs(setpoint))
 
         ts = self.funciones_Nema42.ts_from_vel(setpoint)
         self.motor.avance(ts,self.direccion_motor)

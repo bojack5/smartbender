@@ -41,6 +41,7 @@ class decoder:
       tiempo = self.tiempo_actual - self.tiempo_pasado
       self.velocidad = 0.12566370614359174/tiempo
       self.tiempo_pasado = self.tiempo_actual
+      
 
       print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
 

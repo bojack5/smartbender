@@ -6,7 +6,7 @@ from prbs import prbs
 import random
 import time
 
-DEBUG = True
+DEBUG = False
 FILE = True
 VAL = 0
 FORMATO_ENCABEZADO = "\t%s\t\t%s"
@@ -27,7 +27,7 @@ def main():
 
     while (1):
     	#dato = prbs()
-    	
+    	print contador%3
         if not contador%3:
             valor_prbs = prbs()
             pid.SetPoint(valor_prbs)

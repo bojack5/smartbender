@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import time
 import pigpio
-import numpy as np
+#import numpy as np
 
 class decoder:
 

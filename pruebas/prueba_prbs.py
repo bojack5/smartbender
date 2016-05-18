@@ -12,7 +12,7 @@ VAL = 0
 FORMATO_ENCABEZADO = "\t%s\t\t%s"
 FORMATO_VALORES = "%d\t%f\t%f"
 
-if(FILE):f = open("datos_prbs1_16s.log","w")
+if(FILE):f = open("datos_prbs3s.log","w")
 
 def main():
     global pid

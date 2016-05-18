@@ -30,8 +30,8 @@ class PID_Velocidad(object):
 
         ts = self.funciones_Nema42.ts_from_vel(abs(setpoint))
         self.motor.avance(ts,self.direccion_motor)
-        time.sleep(10)
-        self.encoder.archivo.close()
+        time.sleep(5)
+        #self.encoder.archivo.close()
         self.motor.parar()
 
     

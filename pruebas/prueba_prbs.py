@@ -27,8 +27,8 @@ def main():
 
     while (1):
     	#dato = prbs()
-    	print contador%30
-        if not contador%30:
+    	print contador%300
+        if not contador%300:
             valor_prbs = prbs()
             pid.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs

@@ -12,7 +12,7 @@ VAL = 0
 FORMATO_ENCABEZADO = "\t%s\t\t%s"
 FORMATO_VALORES = "%d\t%f\t%f"
 
-if(FILE):f = open("datos_prbs1_16s.log","w")
+if(FILE):f = open("datos_prbs3s.log","w")
 
 def main():
     global pid
@@ -27,8 +27,8 @@ def main():
 
     while (contador < 10000):
     	#dato = prbs()
-    	print contador%6
-        if not contador%6:
+    	print contador%300
+        if not contador%300:
             valor_prbs = prbs()
             pid.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs

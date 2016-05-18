@@ -37,8 +37,7 @@ class Nema42(object):
 
     def avance(self , tus , direccion):
         self.pi.write(self.pin_direccion , direccion)
-        if tus > 3000: tus = 3000
-        elif tus < 1000 : tus = 1000
+        if tus < 1000 : tus = 1000
         self.pi.wave_clear()
         self.pi.wave_add_generic([
             pigpio.pulse(0,1<<self.pin_pulse,tus),

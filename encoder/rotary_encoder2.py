@@ -30,8 +30,10 @@ class decoder:
       """VARIABLES DE INTERRUPCION"""
       self.pos = 0
       self.tiempo_pasado = time.time()
-      self.tiempo_actual = 0
-      self.velocidad = 0
+      self.tiempo_actual = 0	
+      self.velocidad = np.zeros(5)
+      self.archivo = open('datos_10mm_0.125_0_0.txt','w')
+
       
 
    def callback(self,way):
@@ -39,11 +41,12 @@ class decoder:
       self.tiempo_actual = time.time()
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado
-      self.velocidad = 0.12566370614359174/tiempo
+      self.velocidad = np.append(self.velocidad , 0.12566370614359174/tiempo)
+      self.velocidad.delete(0)
       self.tiempo_pasado = self.tiempo_actual
-      
+      self.archivo.write(velocidad)
 
-      print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
+      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
 
    def _pulse(self, gpio, level, tick):
 

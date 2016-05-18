@@ -15,6 +15,7 @@ FORMATO_VALORES = "%d\t%f\t%f"
 if(FILE):f = open("datos_prbs.log","w")
 
 def main():
+    global pid
     contador = 0
     nombres = ('Prbs' , 'velocidad')
     #dato = int(prbs())
@@ -42,5 +43,6 @@ def main():
 try:
     main()    	
 finally:
+    global pid
     pid.motor.parar()
     f.close()

@@ -27,8 +27,8 @@ def main():
 
     while (1):
     	#dato = prbs()
-    	print contador%3
-        if not contador%3:
+    	print contador%30
+        if not contador%30:
             valor_prbs = prbs()
             pid.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs
@@ -38,7 +38,7 @@ def main():
     	if(DEBUG): print body
     	if(FILE): f.write(body + "\n")
     	time.sleep(0.01)
-        contador += 0.01
+        contador += 1
 
 try:
     main()    	

@@ -95,7 +95,7 @@ class decoder:
 if __name__ == "__main__":
 
    
-
+   import rotary_encoder2
    
    pi = pigpio.pi()
    decoder = rotary_encoder2.decoder(pi, 6, 13,)

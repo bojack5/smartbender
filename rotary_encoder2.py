@@ -100,6 +100,9 @@ if __name__ == "__main__":
    
    pi = pigpio.pi()
    decoder = rotary_encoder2.decoder(pi, 6, 13,)
+   print "kp = %s ki = %s kd = %s"%(decoder.pid_velocidad.kp ,
+                                    decoder.pid_velocidad.ki , 
+                                    decoder.pid_velocidad.kd)
    decoder.pid_velocidad.SetPoint(10)
    time.sleep(3)
    decoder.pid_velocidad.motor.parar()

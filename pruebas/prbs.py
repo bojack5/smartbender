@@ -6,7 +6,7 @@ vel_max = 40
 
 def prbs():
     while True:
-        return choice([-vel_max, 0 , vel_max])
+        return choice(xrange(0,51))
 
 
 def prbs_live():

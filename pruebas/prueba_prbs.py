@@ -40,12 +40,11 @@ def main():
     	if(FILE): f.write(body + "\n")
     	time.sleep(0.01)
         contador += 1
+    decoder.cancel()
+    pid.motor.parar()
+    pi.stop()    
 
 try:
     main()    	
-finally:
-    global decoder
-    decoder.cancel()
-    pid.motor.parar()
-    pi.stop()
+finally:    
     f.close()

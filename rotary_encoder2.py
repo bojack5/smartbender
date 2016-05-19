@@ -48,6 +48,7 @@ class decoder:
       self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
       self.pid_velocidad.pid.update(self.velocidad)
       self.tiempo_pasado = self.tiempo_actual
+      print self.velocidad
 
       
    def _pulse(self, gpio, level, tick):

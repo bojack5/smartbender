@@ -20,7 +20,7 @@ def main():
     contador = 0
     nombres = ('Prbs' , 'velocidad')
     #dato = int(prbs())
-    decoder = decoder(6,13)
+    encoder = decoder(6,13)
     header = FORMATO_ENCABEZADO%nombres
     
     if(DEBUG):print header

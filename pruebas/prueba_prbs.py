@@ -33,7 +33,7 @@ def main():
             valor_prbs = prbs()
             encoder.pid_velocidad.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs
-        velocidad = pid.encoder.velocidad
+        velocidad = encoder.velocidad
     	body = FORMATO_VALORES % (contador , valor_prbs , velocidad)
         
     	if(DEBUG): print body

@@ -40,7 +40,7 @@ def main():
     	if(FILE): f.write(body + "\n")
     	time.sleep(0.01)
         contador += 1
-    decoder.cancel()
+    encoder.cancel()
     pid.motor.parar()
     pi.stop()    
 

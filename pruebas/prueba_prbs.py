@@ -28,7 +28,7 @@ def main():
 
     while (contador < 10000):
     	#dato = prbs()
-    	print contador%300
+    	#print contador%300
         if not contador%300:
             valor_prbs = prbs()
             encoder.pid_velocidad.SetPoint(valor_prbs)

@@ -44,7 +44,7 @@ def main():
 try:
     main()    	
 finally:
-    global encoder
+    global decoder
     decoder.cancel()
     pid.motor.parar()
     pi.stop()

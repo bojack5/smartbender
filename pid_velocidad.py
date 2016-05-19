@@ -14,7 +14,7 @@ class PID_Velocidad(object):
         self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
         self.pi = pigpio.pi()
         self.encoder       = Encoder(self.pi,conf2.pines['encoder']['A'] ,
-                                  conf2.pines['encoder']['B'] ,)
+                                  conf2.pines['encoder']['B'] ,self.Interrupcion)
         self.funciones_Nema42 = funciones.Nema42()
         self.tiempo_actual    = 0
         self.tiempo_pasado    = time.time()
@@ -34,6 +34,8 @@ class PID_Velocidad(object):
         else:
             ts = self.funciones_Nema42.ts_from_vel(abs(setpoint))     	
             self.motor.avance(ts,self.direccion_motor)
+
+
         
         #time.sleep(7.7)
         #for tiempo in range(500):
@@ -42,7 +44,18 @@ class PID_Velocidad(object):
         #self.encoder.archivo.close()
         #self.motor.parar()
 
-    
+   def Interrupcion(self,way):
+
+      self.tiempo_actual = time.time()
+      self.pos += way
+      tiempo = self.tiempo_actual - self.tiempo_pasado
+      self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
+      
+      #self.velocidad.delete(0)
+      self.tiempo_pasado = self.tiempo_actual
+      #self.archivo.write(velocidad)
+
+      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))    
 
         		
 

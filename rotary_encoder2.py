@@ -7,13 +7,13 @@ class decoder:
 
    """Class to decode mechanical rotary encoder pulses."""
 
-   def __init__(self, pi, gpioA, gpioB,callback):
+   def __init__(self, pi, gpioA, gpioB,):
 
 
       self.pi = pi
       self.gpioA = gpioA
       self.gpioB = gpioB
-      self.callback = callback
+      #self.callback = callback
       
       self.levA = 0
       self.levB = 0
@@ -37,18 +37,17 @@ class decoder:
 
       
 
-"""   def callback(self,way):
+   def callback(self,way):
 
       self.tiempo_actual = time.time()
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado
       self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
-      
       #self.velocidad.delete(0)
       self.tiempo_pasado = self.tiempo_actual
       #self.archivo.write(velocidad)
 
-      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))"""
+      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
 
    def _pulse(self, gpio, level, tick):
 

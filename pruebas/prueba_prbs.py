@@ -41,8 +41,8 @@ def main():
     	time.sleep(0.01)
         contador += 1
     encoder.cancel()
-    pid.motor.parar()
-    pi.stop()    
+    encoder.pid_velocidad.motor.parar()
+    encoder.pi.stop()    
 
 try:
     main()    	

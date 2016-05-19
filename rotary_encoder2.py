@@ -41,7 +41,7 @@ class decoder:
       
 
    def callback(self,way):
-      print "callback"
+      #print "callback"
       self.tiempo_actual = time.time()
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado

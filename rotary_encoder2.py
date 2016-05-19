@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import time
 import pigpio
+from pid_velocidad import PID_Velocidad as pidv
 #import numpy as np
 
 class decoder:
@@ -33,7 +34,9 @@ class decoder:
       self.tiempo_pasado = time.time()
       self.tiempo_actual = 0	
       self.velocidad = 0
-      self.archivo = open('datos_10mm_0.125_0_0.txt','w')
+      self.pid_velocidad = pidv()
+
+      #self.archivo = open('datos_10mm_0.125_0_0.txt','w')
 
       
 
@@ -43,12 +46,10 @@ class decoder:
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado
       self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
-      #self.velocidad.delete(0)
+      self.pid_velocidad.pid.update(self.velocidad)
       self.tiempo_pasado = self.tiempo_actual
-      #self.archivo.write(velocidad)
 
-      #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))
-
+      
    def _pulse(self, gpio, level, tick):
 
       """
@@ -93,25 +94,14 @@ class decoder:
 
 if __name__ == "__main__":
 
-   import pigpio
+   
 
-   import rotary_encoder2
-
-   pos = 0
-
-   def callback(way):
-
-      global pos
-
-      pos += way
-
-      print("pos={}".format(pos))
-
+   
    pi = pigpio.pi()
-
    decoder = rotary_encoder2.decoder(pi, 6, 13,)
-
-   time.sleep(300)
+   decoder.pid_velocidad.SetPoint(10)
+   time.sleep(15)
+   decoder.pid_velocidad.motor.parar()
 
    decoder.cancel()
 

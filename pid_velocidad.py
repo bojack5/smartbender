@@ -9,17 +9,11 @@ import time
 
 class PID_Velocidad(object):
     """Clase que ejecuta un PID de velocidad en la maquina dobladora"""
-    def __init__(self , kp = 0.78125, ki = 0.5075 , kd = 0.0):
+    def __init__(self , kp = 1, ki = 0 , kd = 0.0):
         self.pid = PID(kp , ki , kd)
         self.motor = Nema42(conf2.pines['Nema42']['direccion'] , conf2.pines['Nema42']['pulso'])
         self.pi = pigpio.pi()
-        self.encoder       = Encoder(self.pi,conf2.pines['encoder']['A'] ,
-                                  conf2.pines['encoder']['B'] ,self.Interrupcion)
         self.funciones_Nema42 = funciones.Nema42()
-        self.tiempo_actual    = 0
-        self.tiempo_pasado    = time.time()
-        self.velocidad        = 0
-        self.posicion         = 0
         self.direccion_motor  = 0
 
     
@@ -34,7 +28,11 @@ class PID_Velocidad(object):
         else:
             ts = self.funciones_Nema42.ts_from_vel(abs(setpoint))     	
             self.motor.avance(ts,self.direccion_motor)
+    
+    def update(self , valor):
+        self.pid.update(valor)
 
+    
 
         
         #time.sleep(7.7)
@@ -44,20 +42,7 @@ class PID_Velocidad(object):
         #self.encoder.archivo.close()
         #self.motor.parar()
 
-    def Interrupcion(self,way):
-
-       self.tiempo_actual = time.time()
-       self.pos += way
-       tiempo = self.tiempo_actual - self.tiempo_pasado
-       self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
-      
-       #self.velocidad.delete(0)
-       self.tiempo_pasado = self.tiempo_actual
-       #self.archivo.write(velocidad)
-
-       #print("posicion={}\tvelocidad={}".format(self.pos,self.velocidad))    
-
-        		
+    
 
 
 

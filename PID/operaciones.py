@@ -46,6 +46,9 @@ class Nema42(object):
 
         return 2*ts*1000000
 
+    def pulsos_2_distancia(self):
+        pass    
+
 
             
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import sys
 sys.path.append('..')
-from pid_velocidad import PID_Velocidad as pidv
+#from pid_velocidad import PID_Velocidad as pidv
+from rotary_encoder2 import decoder
 from prbs import prbs
 import random
 import time
@@ -12,14 +13,14 @@ VAL = 0
 FORMATO_ENCABEZADO = "\t%s\t\t%s"
 FORMATO_VALORES = "%d\t%f\t%f"
 
-if(FILE):f = open("datos_prbs1_4s.log","w")
+if(FILE):f = open("prbs40_3s.log","w")
 
 def main():
     global pid
     contador = 0
     nombres = ('Prbs' , 'velocidad')
     #dato = int(prbs())
-    pid = pidv()
+    decoder = decoder(6,13)
     header = FORMATO_ENCABEZADO%nombres
     
     if(DEBUG):print header
@@ -27,10 +28,10 @@ def main():
 
     while (contador < 10000):
     	#dato = prbs()
-    	print contador%25
-        if not contador%25:
+    	print contador%300
+        if not contador%300:
             valor_prbs = prbs()
-            pid.SetPoint(valor_prbs)
+            encoder.pid_velocidad.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs
         velocidad = pid.encoder.velocidad
     	body = FORMATO_VALORES % (contador , valor_prbs , velocidad)
@@ -43,6 +44,8 @@ def main():
 try:
     main()    	
 finally:
-    global pid
+    global encoder
+    decoder.cancel()
     pid.motor.parar()
+    pi.stop()
     f.close()

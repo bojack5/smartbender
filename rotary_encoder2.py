@@ -101,7 +101,7 @@ if __name__ == "__main__":
    pi = pigpio.pi()
    decoder = rotary_encoder2.decoder(pi, 6, 13,)
    decoder.pid_velocidad.SetPoint(10)
-   time.sleep(15)
+   time.sleep(3)
    decoder.pid_velocidad.motor.parar()
 
    decoder.cancel()

@@ -37,7 +37,7 @@ class PID:
 		"""
 
 		self.error = self.set_point - current_value
-
+                #print self.error
 		self.P_value = self.Kp * self.error
 		self.D_value = self.Kd * ( self.error - self.Derivator)
 		self.Derivator = self.error

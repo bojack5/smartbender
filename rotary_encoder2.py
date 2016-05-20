@@ -46,11 +46,13 @@ class decoder:
       self.pos += way
       tiempo = self.tiempo_actual - self.tiempo_pasado
       self.velocidad = (0.12566370614359174/tiempo)*way#np.append(self.velocidad , 0.12566370614359174/tiempo)
-      self.pid_velocidad.pid.update(self.velocidad)
+      error = self.pid_velocidad.pid.update(self.velocidad)
+      print self.pid_velocidad.funciones_Nema42.ts_from_vel(self.velocidad)
+      #self.pid_velocidad.motor.avance(self.pid_velocidad.funciones_Nema42.ts_from_vel(self.velocidad)-error,1)
       self.tiempo_pasado = self.tiempo_actual
-      print self.pos*0.12566370614359174
+      #print self.pos*0.12566370614359174
       #print self.velocidad
-
+      #print error
       
    def _pulse(self, gpio, level, tick):
 
@@ -99,16 +101,16 @@ if __name__ == "__main__":
    
    import rotary_encoder2
    
-   pi = pigpio.pi()
+   
    decoder = rotary_encoder2.decoder( 6, 13,)
    print "kp = %s ki = %s kd = %s"%(decoder.pid_velocidad.pid.Kp ,
                                     decoder.pid_velocidad.pid.Ki , 
                                     decoder.pid_velocidad.pid.Kd)
-   decoder.pid_velocidad.SetPoint(10)
+   decoder.pid_velocidad.SetPoint(20)
    time.sleep(3)
    decoder.pid_velocidad.motor.parar()
 
    decoder.cancel()
 
-   pi.stop()
+   decoder.pi.stop()
 

@@ -13,12 +13,12 @@ VAL = 0
 FORMATO_ENCABEZADO = "\t%s\t\t%s"
 FORMATO_VALORES = "%d\t%f\t%f"
 
-if(FILE):f = open("prbs40_3s.log","w")
+if(FILE):f = open("prbs_ampli_multiple1s.log","w")
 
 def main():
     global pid
     contador = 0
-    nombres = ('Prbs' , 'velocidad')
+    nombres = ('Velocidad' , 'Posicion')
     #dato = int(prbs())
     encoder = decoder(6,13)
     header = FORMATO_ENCABEZADO%nombres
@@ -34,7 +34,7 @@ def main():
             encoder.pid_velocidad.SetPoint(valor_prbs)
             print "Valor prbs = %s"%valor_prbs
         velocidad = encoder.velocidad
-    	body = FORMATO_VALORES % (contador , valor_prbs , velocidad)
+    	body = FORMATO_VALORES % (contador , velocidad , encoder.pos*0.12566370614359174)
         
     	if(DEBUG): print body
     	if(FILE): f.write(body + "\n")

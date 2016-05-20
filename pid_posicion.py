@@ -12,8 +12,6 @@ class PID_Posicion(object):
         #self.dist_x_pulso_encoder = 0.12566370614359174
 
     def SetPoint(self , setpoint):
-    	if setpoint < 0: self.direccion_velocidad  = -1
-        else : self.direccion_velocidad = 1
         self.pid_posicion.pid.setPoint(abs(setpoint))	
         if setpoint > 0: direccion = -1
         elif setPoint < 0: direccion = 1

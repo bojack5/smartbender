@@ -61,6 +61,7 @@ class decoder:
       else: 
          self.pid_posicion.pid_velocidad.SetPoint(0)
       self.tiempo_pasado = self.tiempo_actual
+      print 'posicion = %s'%self.pos
 
    def _pulse(self, gpio, level, tick):
 

@@ -66,7 +66,7 @@ class decoder:
    def _pulse(self, gpio, level, tick):
 
       """
-      Decode the rotary encoder pulse.
+      Decodificamos el encoder rotatorio.
 
                    +---------+         +---------+      0
                    |         |         |         |
@@ -99,11 +99,19 @@ class decoder:
    def cancel(self):
 
       """
-      Cancel the rotary encoder decoder.
+      Cancelamos las interrupciones , y por lo tanto el decoder.
       """
 
       self.cbA.cancel()
       self.cbB.cancel()
+
+   def SetPoint_posicion(self,setpoint):
+      if abs(setpoint-self.pos) < 0.2:
+         pass
+      else :
+         self.pid_posicion.SetPoint(setpoint)   
+
+         
 
 if __name__ == "__main__":
 

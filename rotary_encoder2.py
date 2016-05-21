@@ -104,8 +104,8 @@ class decoder:
       self.cbB.cancel()
 
    def SetPoint_posicion(self,setpoint):
-      self.cbA = self.pi.callback(gpioA, pigpio.EITHER_EDGE, self._pulse)
-      self.cbB = self.pi.callback(gpioB, pigpio.EITHER_EDGE, self._pulse)
+      self.cbA = self.pi.callback(self.gpioA, pigpio.EITHER_EDGE, self._pulse)
+      self.cbB = self.pi.callback(self.gpioB, pigpio.EITHER_EDGE, self._pulse)
       if abs(setpoint-self.pos) < 0.2:
          pass
       else :
@@ -120,14 +120,16 @@ if __name__ == "__main__":
    
    
    decoder = rotary_encoder2.decoder( 6, 13,)
-   print "kp = %s ki = %s kd = %s"%(decoder.pid_velocidad.pid.Kp ,
-                                    decoder.pid_velocidad.pid.Ki , 
-                                    decoder.pid_velocidad.pid.Kd)
-   decoder.pid_velocidad.SetPoint(20)
-   time.sleep(3)
-   decoder.pid_velocidad.motor.parar()
+   try:
+      while 1:
+         sp = raw_input('ingresa comando : ')
+         if sp == 'pos': print decoder.pos
+         else : decoder.SetPoint_posicion(float(sp))
+   except KeyboardInterrupt:
 
-   decoder.cancel()
+      decoder.pid_velocidad.motor.parar()
 
-   decoder.pi.stop()
+      decoder.cancel()
+
+      decoder.pi.stop()
 

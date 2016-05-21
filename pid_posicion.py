@@ -2,12 +2,14 @@
 from PID.pid import PID 
 from pid_velocidad import PID_Velocidad as pidv
 import PID.operaciones as funciones
+from stepper.stepper import Nema42
 
 class PID_Posicion(object):
     """docstring for PID_Posicion"""
     def __init__(self, kp = 1.0 , ki =0.0, kd =0.0):
         self.pid  = PID(kp , ki , kd)
         self.pid_velocidad = pidv()
+        self.motor = Nema42(12,7)
 
     def SetPoint(self , setpoint):
         self.pid_posicion.pid.setPoint(abs(setpoint))	
@@ -17,7 +19,7 @@ class PID_Posicion(object):
         sp = 3000 - abs(setpoint)
         if sp < 1000 : sp = 1000
         sp = sp *direccion
-        self.pid_velocidad.SetPoint(sp)
+        self.motor.avance(sp)
 
 
             

@@ -41,7 +41,7 @@ class Nema42(object):
         else:
             
             if tus < 0: direccion = 1
-            else direccion = 0
+            else : direccion = 0
             self.pi.write(self.pin_direccion , direccion)
             if tus < 1000 : tus = 1000
             if tus > 2500 : tus = 2500
@@ -53,6 +53,7 @@ class Nema42(object):
             self.pi.wave_send_repeat(wid)
 
     def parar(self):
+        print "PARADA"
         self.pi.wave_tx_stop()
             
 

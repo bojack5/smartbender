@@ -32,7 +32,7 @@ class decoder:
       self.pos = 0
       self.tiempo_pasado = time.time()
       self.tiempo_actual = 0	
-      self.velocidad = 0
+      #self.velocidad = 0
       self.pid_posicion = pidp()
 
 
@@ -59,7 +59,7 @@ class decoder:
          self.pid_posicion.motor.avance(0)
          self.cancel()
       self.tiempo_pasado = self.tiempo_actual
-      print 'posicion = %s'%self.pos
+      #print 'posicion = %s'%self.pos
 
    def _pulse(self, gpio, level, tick):
 

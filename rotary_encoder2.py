@@ -141,5 +141,5 @@ if __name__ == "__main__":
       decoder.cancel()
 
       decoder.pi.stop()
-      decoder.f.close()
+      f.close()
 

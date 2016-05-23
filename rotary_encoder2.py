@@ -116,22 +116,21 @@ if __name__ == "__main__":
    FORMATO_ENCABEZADO = "\t%s\t\t%s"
    FORMATO_VALORES = "%d\t%f\t%f"
    nombre = ('SetPoint' , 'Posicion')
-   f = open('datos_pid_posicion10.log','w')
+   f = open('datos_pid_posicion_var.log','w')
    f.write(FORMATO_ENCABEZADO%nombre+"\n")
 
 
-   contador = 0
    decoder = rotary_encoder2.decoder( 6, 13,)
+   decoder.contador = 0
    try:
 
       while 1:
-         global contador
-         contador += 1
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
          while abs(decoder.pid_posicion.pid.set_point-decoder.pos) > 0.1:
-            f.write(FORMATO_VALORES%(contador,float(sp),decoder.pos)+"\n")
+            decoder.contador += 1
+            f.write(FORMATO_VALORES%(decoder.contador,float(sp),decoder.pos)+"\n")
             
    except KeyboardInterrupt:
 

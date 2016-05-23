@@ -132,7 +132,7 @@ if __name__ == "__main__":
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
          while abs(decoder.pid_posicion.pid.set_point-decoder.pos) > 0.1:
-            f.write(self.FORMATO_ENCABEZADO%self.nombres+"\n")
+            f.write(FORMATO_ENCABEZADO%nombre+"\n")
             
    except KeyboardInterrupt:
 

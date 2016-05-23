@@ -128,9 +128,8 @@ if __name__ == "__main__":
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
-         while abs(decoder.pid_posicion.pid.set_point-decoder.pos) > 0.1:
-            decoder.contador += 1
-            f.write(FORMATO_VALORES%(decoder.contador,float(sp),decoder.pos)+"\n")
+         decoder.contador += 1
+         f.write(FORMATO_VALORES%(decoder.contador,float(sp),decoder.pos)+"\n")
             
    except KeyboardInterrupt:
 

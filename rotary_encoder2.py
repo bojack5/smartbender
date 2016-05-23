@@ -18,8 +18,6 @@ class decoder:
       
       self.levA = 0
       self.levB = 0
-      self.nombres = ('SetPoint' , 'Posicion')
-      self.f.write(self.FORMATO_ENCABEZADO%self.nombres+"\n")
       self.lastGpio = None
 
       self.pi.set_mode(gpioA, pigpio.INPUT)

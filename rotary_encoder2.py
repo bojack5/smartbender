@@ -123,7 +123,9 @@ if __name__ == "__main__":
    contador = 0
    decoder = rotary_encoder2.decoder( 6, 13,)
    try:
+
       while 1:
+         global contador
          contador += 1
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos

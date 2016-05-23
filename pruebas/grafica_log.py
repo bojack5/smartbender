@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = "grafica_pid.txt"
+filename = "datos_pid_posicion10.log"
 
 with open(filename) as f:
     header = f.readline().split("\t")

@@ -4,6 +4,9 @@ import pigpio
 from pid_posicion import PID_Posicion as pidp
 #import numpy as np
 
+FORMATO_ENCABEZADO = "\t%s\t\t%s"
+FORMATO_VALORES = "%d\t%f\t%f"
+nombre = ('SetPoint' , 'Posicion')
 class decoder:
 
    """Class to decode mechanical rotary encoder pulses."""
@@ -18,7 +21,11 @@ class decoder:
       
       self.levA = 0
       self.levB = 0
-
+      self.f = open('grafica_pid.txt','w')
+      self.FORMATO_ENCABEZADO = "\t%s\t\t%s"
+      self.FORMATO_VALORES    = "%d\t%f\t%f"
+      self.nombres = ('SetPoint' , 'Posicion')
+      self.f.write(self.FORMATO_ENCABEZADO%self.nombres+"\n")
       self.lastGpio = None
 
       self.pi.set_mode(gpioA, pigpio.INPUT)
@@ -26,45 +33,41 @@ class decoder:
 
       self.pi.set_pull_up_down(gpioA, pigpio.PUD_UP)
       self.pi.set_pull_up_down(gpioB, pigpio.PUD_UP)
-
+      
       
       """VARIABLES DE INTERRUPCION"""
       self.pos = 0
       self.tiempo_pasado = time.time()
       self.tiempo_actual = 0	
-      #self.velocidad = 0
+      self.velocidad = 0
       self.pid_posicion = pidp()
 
 
       #self.archivo = open('datos_10mm_0.125_0_0.txt','w')
 
-      
 
    def callback(self,way):
-      #print "callback"
-      #self.tiempo_actual = time.time()
       self.pos += way*0.12566370614359174
-      #tiempo = self.tiempo_actual - self.tiempo_pasado
+      self.velocidad += 1
+      setpoint = self.pid_posicion.pid.set_point
+      body = self.FORMATO_VALORES % (self.velocidad , setpoint , self.pos)
+      self.f.write(body + "\n")
       error = self.pid_posicion.pid.update(self.pos)
-      if abs(self.pos - self.pid_posicion.pid.set_point) > 0.5:
+      if abs(self.pos - self.pid_posicion.pid.set_point) > 0.1:
 
          if error > 0 : direccion = 1
          elif error < 0 : direccion = -1
       
          sp = 2500 - abs(error)
-         #print "dgdfgfgdfg   %s"%error
          if sp<0: self.pid_posicion.motor.avance(direccion)
          else:
  
             sp = sp * direccion
-            #print "cssdfsdfsdfsdf = %s"%sp
             self.pid_posicion.motor.avance(sp) 
           
       else: 
          self.pid_posicion.motor.avance(0)
          self.cancel()
-      #self.tiempo_pasado = self.tiempo_actual
-      #print 'posicion = %s'%self.pos
 
    def _pulse(self, gpio, level, tick):
 
@@ -132,9 +135,10 @@ if __name__ == "__main__":
          else : decoder.SetPoint_posicion(float(sp))
    except KeyboardInterrupt:
 
-      decoder.pid_velocidad.motor.parar()
+      decoder.pid_posicion.motor.parar()
 
       decoder.cancel()
 
       decoder.pi.stop()
+      decoder.f.close()
 

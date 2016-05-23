@@ -8,6 +8,7 @@ class Nema23(object):
         self.pin_pulse     = pin_pulse
         self.pin_enable    = pin_enable
         self.pi = pigpio.pi()
+        self.pi.wave_clear()
         self.pi.set_mode(self.pin_direccion, pigpio.OUTPUT)
         self.pi.set_mode(self.pin_pulse, pigpio.OUTPUT)
         self.pi.set_mode(self.pin_enable, pigpio.OUTPUT)
@@ -32,8 +33,10 @@ class Nema42(object):
         self.pin_direccion = pin_direccion
         self.pin_pulse     = pin_pulse
         self.pi = pigpio.pi()
+        self.pi.wave_clear()
         self.pi.set_mode(self.pin_direccion, pigpio.OUTPUT)
         self.pi.set_mode(self.pin_pulse, pigpio.OUTPUT)
+        self.wid_vieja = None
 
     def avance(self , tus ):
         if tus == 0:
@@ -46,12 +49,18 @@ class Nema42(object):
             if abs(tus) < 1500 : tus = 1500
             if abs(tus) > 2500 : tus = 2500
             tus = abs(int(tus))
-            self.pi.wave_clear()
             self.pi.wave_add_generic([
                 pigpio.pulse(0,1<<self.pin_pulse,tus),
                 pigpio.pulse(1<<self.pin_pulse,0,tus),])
             wid = self.pi.wave_create()
-            self.pi.wave_send_repeat(wid)
+            if self.wid_vieja is not None:
+                self.pi.wave_send_using_mode(wid , pigpio.WAVE_MODE_REPEAT_SYNC)
+                while self.pi.wave_tx_at() !=wid:
+                    pass
+                self.pi.wave_delete(self.wid_vieja)
+            else : 
+                self.pi.wave_send_repeat(wid)
+            self.wid_vieja = wid
 
     def parar(self):
         print "PARADA"

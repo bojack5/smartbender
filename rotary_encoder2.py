@@ -40,10 +40,6 @@ class decoder:
 
    def callback(self,way):
       self.pos += way*0.12566370614359174
-      self.velocidad += 1
-      setpoint = self.pid_posicion.pid.set_point
-      body = self.FORMATO_VALORES % (self.velocidad , setpoint , self.pos)
-      self.f.write(body + "\n")
       error = self.pid_posicion.pid.update(self.pos)
       if abs(self.pos - self.pid_posicion.pid.set_point) > 0.1:
 
@@ -124,15 +120,16 @@ if __name__ == "__main__":
    f.write(FORMATO_ENCABEZADO%nombre+"\n")
 
 
-   
+   contador = 0
    decoder = rotary_encoder2.decoder( 6, 13,)
    try:
       while 1:
+         contador += 1
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
          while abs(decoder.pid_posicion.pid.set_point-decoder.pos) > 0.1:
-            f.write(FORMATO_ENCABEZADO%nombre+"\n")
+            f.write(FORMATO_VALORES%(contador,float(sp),decoder.pos)+"\n")
             
    except KeyboardInterrupt:
 

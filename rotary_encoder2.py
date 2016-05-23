@@ -4,9 +4,6 @@ import pigpio
 from pid_posicion import PID_Posicion as pidp
 #import numpy as np
 
-FORMATO_ENCABEZADO = "\t%s\t\t%s"
-FORMATO_VALORES = "%d\t%f\t%f"
-nombre = ('SetPoint' , 'Posicion')
 class decoder:
 
    """Class to decode mechanical rotary encoder pulses."""
@@ -21,9 +18,6 @@ class decoder:
       
       self.levA = 0
       self.levB = 0
-      self.f = open('grafica_pid.txt','w')
-      self.FORMATO_ENCABEZADO = "\t%s\t\t%s"
-      self.FORMATO_VALORES    = "%d\t%f\t%f"
       self.nombres = ('SetPoint' , 'Posicion')
       self.f.write(self.FORMATO_ENCABEZADO%self.nombres+"\n")
       self.lastGpio = None
@@ -125,18 +119,26 @@ if __name__ == "__main__":
 
    
    import rotary_encoder2
-   
-   
+   FORMATO_ENCABEZADO = "\t%s\t\t%s"
+   FORMATO_VALORES = "%d\t%f\t%f"
+   nombre = ('SetPoint' , 'Posicion')
+   f.write(FORMATO_ENCABEZADO%nombre+"\n")
+
+
+   f = open('datos_pid_posicion10.log')
    decoder = rotary_encoder2.decoder( 6, 13,)
    try:
       while 1:
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
+         while abs(decoder.pid_posicion.pid.set_point-decoder.pos) > 0.1:
+            f.write(self.FORMATO_ENCABEZADO%self.nombres+"\n")
+            
    except KeyboardInterrupt:
 
       decoder.pid_posicion.motor.parar()
-
+      f.close()
       decoder.cancel()
 
       decoder.pi.stop()

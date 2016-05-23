@@ -2,24 +2,24 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = "prbs_ampli_multiple1s.log"
+filename = "grafica_pid.txt"
 
 with open(filename) as f:
     header = f.readline().split("\t")
     
 data = np.genfromtxt(filename , delimiter = '\t' , skip_header = 1 , 
-	                 names = ['corrida' , 'velocidad' , 'posicion' ,])
+	                 names = ['corrida' , 'SetPoint' , 'Posicion' ,])
 
 fig = plt.figure(1)
 ax1 = fig.add_subplot(211)
 ax2 = fig.add_subplot(212)
-ax1.plot(data['corrida'] , data['velocidad'] ,'g')
+ax1.plot(data['corrida'] , data['SetPoint'] ,'g')
 
-ax2.plot(data['corrida'] , data['posicion'] , 'r')
+ax2.plot(data['corrida'] , data['Posicion'] , 'r')
 
-ax1.set_title("Prueba PRBS para PID de posicion")
+ax1.set_title("Grafica Posicion ")
 ax1.set_xlabel('Corrida')
-ax1.set_ylabel('Velocidad')
+ax1.set_ylabel('SetPoint')
 
 ax2.set_xlabel('Corrida')
 ax2.set_ylabel('posicion')

@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = "datos_pid_posicion_var.log"
+filename = "datos_pid_posicion_variable.log"
 
 with open(filename) as f:
     header = f.readline().split("\t")

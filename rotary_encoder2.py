@@ -122,10 +122,11 @@ if __name__ == "__main__":
    FORMATO_ENCABEZADO = "\t%s\t\t%s"
    FORMATO_VALORES = "%d\t%f\t%f"
    nombre = ('SetPoint' , 'Posicion')
+   f = open('datos_pid_posicion10.log')
    f.write(FORMATO_ENCABEZADO%nombre+"\n")
 
 
-   f = open('datos_pid_posicion10.log')
+   
    decoder = rotary_encoder2.decoder( 6, 13,)
    try:
       while 1:

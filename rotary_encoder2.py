@@ -122,7 +122,7 @@ if __name__ == "__main__":
    FORMATO_ENCABEZADO = "\t%s\t\t%s"
    FORMATO_VALORES = "%d\t%f\t%f"
    nombre = ('SetPoint' , 'Posicion')
-   f = open('datos_pid_posicion10.log')
+   f = open('datos_pid_posicion10.log','w')
    f.write(FORMATO_ENCABEZADO%nombre+"\n")
 
 

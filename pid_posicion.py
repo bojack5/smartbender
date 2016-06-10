@@ -12,7 +12,7 @@ class PID_Posicion(object):
         self.motor = Nema42(12,7)
 
     def SetPoint(self , setpoint):
-        self.pid.setPoint(abs(setpoint))	
+        self.pid.setPoint(setpoint)	
         if setpoint > 0: direccion = 1
         elif setpoint <= 0: direccion = -1
         

@@ -9,7 +9,9 @@ Maquina smartbender
 - [x] Correccion de direccion debido a cambio de direccion encoder
 - [ ] Maquinado de Guias
 - [ ] Unidad FRL Nueva Mas grande
+- [ ] Selecionar motor DC con encoder para dobladora
 - [ ] Arreglar cortado de cizalla (posible mala nivelacion)
+- [ ] Diseno de Pseudocodigo de control
 - [ ] Rectificado de flecha dobladora
 - [ ] Comprar presiostatos para cilindros chicos
 - [ ] Comprar balero 60x35x17 recto

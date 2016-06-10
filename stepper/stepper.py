@@ -43,15 +43,15 @@ class Nema42(object):
             self.parar()
         else:
             
-            if tus < 0: direccion = 0
-            else : direccion = 1
+            if tus < 0: direccion = 1
+            else : direccion = 0
             self.pi.write(self.pin_direccion , direccion)
             if abs(tus) < 1500 : tus = 1500
             if abs(tus) > 2500 : tus = 2500
             tus = abs(int(tus))
             self.pi.wave_add_generic([
-                pigpio.pulse(0,1<<self.pin_pulse,tus),
-                pigpio.pulse(1<<self.pin_pulse,0,tus),])
+                pigpio.pulse(0,1<<self.pin_pulse,abs(tus)),
+                pigpio.pulse(1<<self.pin_pulse,0,abs(tus)),])
             wid = self.pi.wave_create()
             if self.wid_vieja is not None:
                 self.pi.wave_send_using_mode(wid , pigpio.WAVE_MODE_REPEAT_SYNC)

@@ -41,11 +41,11 @@ class decoder:
    def callback(self,way):
       self.pos += way*0.12566370614359174
       error = self.pid_posicion.pid.update(self.pos)
-      if abs(self.pos - self.pid_posicion.pid.set_point) > 0.1:
+      if abs(self.pos - self.pid_posicion.pid.set_point) > 0.2:
 
          if error > 0 : direccion = 1
          elif error < 0 : direccion = -1
-      
+         print error
          sp = 2500 - abs(error)
          if sp<0: self.pid_posicion.motor.avance(direccion)
          else:
@@ -85,10 +85,10 @@ class decoder:
 
          if   gpio == self.gpioA and level == 1:
             if self.levB == 1:
-               self.callback(1)
+               self.callback(-1)
          elif gpio == self.gpioB and level == 1:
             if self.levA == 1:
-               self.callback(-1)
+               self.callback(1)
 
    def cancel(self):
 
@@ -113,30 +113,19 @@ if __name__ == "__main__":
 
    
    import rotary_encoder2
-   FORMATO_ENCABEZADO = "\t%s\t\t%s"
-   FORMATO_VALORES = "%d\t%f\t%f"
-   nombre = ('SetPoint' , 'Posicion')
-   f = open('datos_pid_posicion_variable.log','w')
-   f.write(FORMATO_ENCABEZADO%nombre+"\n")
-
 
    decoder = rotary_encoder2.decoder( 6, 13,)
-   decoder.contador = 0
    try:
 
       while 1:
          sp = raw_input('ingresa comando : ')
          if sp == 'pos': print "jfsdkfjsdfklsjdf %s"%decoder.pos
          else : decoder.SetPoint_posicion(float(sp))
-         decoder.contador += 1
-         f.write(FORMATO_VALORES%(decoder.contador,float(sp),decoder.pos)+"\n")
             
    except KeyboardInterrupt:
 
       decoder.pid_posicion.motor.parar()
-      f.close()
       decoder.cancel()
 
       decoder.pi.stop()
-      f.close()
 

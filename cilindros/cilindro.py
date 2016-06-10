@@ -2,28 +2,28 @@
 import time
 import math as m 
 import conf
-#from smbus import SMBus
+from smbus import SMBus
 
 class Pines(object):
     """docstring for Pines"""
     def __init__(self,address):
         conf.estado = 0b11111111
         self.address = address
-
+        self.bus = SMBus(1)
     def cero(self,pin):
         conf.estado &=~(1<<pin)
-        #bus.write_byte(self.address , self.estado)
+        self.bus.write_byte(self.address , conf.estado)
         return conf.estado
 
     def uno(self , pin):
         conf.estado |=(1<<pin)
-        #bus.write_byte(self.address , self.estado)
+        self.bus.write_byte(self.address , conf.estado)
         return conf.estado
             
     def toggle(self,pin):
         numero = 2**pin
         conf.estado = conf.estado^numero
-        #bus.write_byte(self.address , self.estado)
+        self.bus.write_byte(self.address , conf.estado)
         return conf.estado
 
     def toggle2(self,pin1,pin2):
@@ -32,7 +32,7 @@ class Pines(object):
     
     def reset(self):
         self.estado = self.estado|255
-        #bus.write_byte(address , self.estado)  
+        self.bus.write_byte(address , self.estado)  
 
 class Sencillo(object):
     """docstring for Simple"""

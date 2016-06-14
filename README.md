@@ -14,7 +14,7 @@ Maquina smartbender
 - [ ] Diseno de Pseudocodigo de control
 - [ ] Rectificado de flecha dobladora
 - [ ] Comprar presiostatos para cilindros chicos
-- [ ] Comprar balero 60x35x17 recto
+- [x] Comprar balero 60x35x17 recto
 - [ ] comprar agarraderas   
 - [ ] Soldar tuercas a laminas
 - [ ] cajas en lamina Inoxidable 

@@ -33,29 +33,31 @@ class decoder:
       self.tiempo_actual = 0	
       self.velocidad = 0
       self.pid_posicion = pidp()
+      self.status = 0
 
 
       #self.archivo = open('datos_10mm_0.125_0_0.txt','w')
 
 
    def callback(self,way):
-      self.pos += way*0.12566370614359174
+      self.pos += way#*0.12566370614359174
       error = self.pid_posicion.pid.update(self.pos)
-      if abs(self.pos - self.pid_posicion.pid.set_point) > 0.2:
+      if abs(self.pos - self.pid_posicion.pid.set_point) > 0:
 
          if error > 0 : direccion = 1
          elif error < 0 : direccion = -1
-         print error
-         sp = 2500 - abs(error)
+         #print error
+         sp = 3500 - abs(error)
          if sp<0: self.pid_posicion.motor.avance(direccion)
          else:
  
             sp = sp * direccion
             self.pid_posicion.motor.avance(sp) 
-          
+                      
       else: 
          self.pid_posicion.motor.avance(0)
          self.cancel()
+         self.status = 0
 
    def _pulse(self, gpio, level, tick):
 
@@ -106,7 +108,7 @@ class decoder:
          pass
       else :
          self.pid_posicion.SetPoint(setpoint)   
-
+         self.status = 1
          
 
 if __name__ == "__main__":

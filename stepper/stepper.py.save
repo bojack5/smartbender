@@ -15,6 +15,7 @@ class Nema23(object):
         self.wid_vieja = None
 
     def avance(self , tus , ):
+        
         if not tus: self.parar()
         else :
             if tus< 0: direccion = 1
@@ -60,8 +61,8 @@ class Nema42(object):
             if tus < 0: direccion = 1
             else : direccion = 0
             self.pi.write(self.pin_direccion , direccion)
-            if abs(tus) <= 3000 : tus = 3000
-            if abs(tus) >= 4000 : tus = 4000
+            if abs(tus) < 1500 : tus = 1500
+            if abs(tus) > 2500 : tus = 2500
             tus = abs(int(tus))
             self.pi.wave_add_generic([
                 pigpio.pulse(0,1<<self.pin_pulse,abs(tus)),

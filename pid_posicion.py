@@ -6,7 +6,7 @@ from stepper.stepper import Nema42
 
 class PID_Posicion(object):
     """docstring for PID_Posicion"""
-    def __init__(self, kp = 0.5 , ki =0.0, kd =0.0):
+    def __init__(self, kp = 1.5 , ki =0.5, kd =0.0):
         self.pid  = PID(kp , ki , kd)
         #self.pid_velocidad = pidv()
         self.motor = Nema42(12,7)

@@ -112,7 +112,6 @@ class decoder:
          
 
 if __name__ == "__main__":
-
    
    import rotary_encoder2
 
@@ -128,6 +127,5 @@ if __name__ == "__main__":
 
       decoder.pid_posicion.motor.parar()
       decoder.cancel()
-
       decoder.pi.stop()
 

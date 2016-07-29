@@ -113,6 +113,12 @@ try:
             time.sleep(1)
 except KeyboardInterrupt:
     tr.entrar()
+    m1.entrar()
+    m2.entrar()
+    pr.entrar()
+    cz.entrar()
+    db.entrar()
+
     decoder.pid_posicion.motor.parar()
     decoder.cancel()
     decoder.pi.stop()

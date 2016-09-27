@@ -1,0 +1,81 @@
+Partlist exported from /home/bojack/Documents/.smartbender/PCB/pcb_maquina.sch at 27/09/16 10:21 A.M.
+
+Part         Value    Device      Package Description                       MF                      MPN       OC_FARNELL OC_NEWARK
+3V3                   F09HP       F09HP   SUB-D                                                               unknown    unknown  
+24V-N                 AK300/2     AK300/2 CONNECTOR                                                           unknown    unknown  
+D1           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D2           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D3           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D4           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D5           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D6           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D7           1N4004   1N4004      DO41-10 DIODE                                                                                   
+D8           1N4004   1N4004      DO41-10 DIODE                                                                                   
+ENC-SIGNAL            AK500/2     AK500/2 CONNECTOR                                                           unknown    unknown  
+ENC-SUPPLY            AK500/2     AK500/2 CONNECTOR                                                           unknown    unknown  
+FINESCARRERA          F15HP       F15HP   SUB-D                                                               unknown    unknown  
+LED5V                 LED3MM      LED3MM  LED                                                                                     
+LED24V                LED3MM      LED3MM  LED                                                                                     
+LEDP0                 LED3MM      LED3MM  LED                                                                                     
+LEDP1                 LED3MM      LED3MM  LED                                                                                     
+LEDP2                 LED3MM      LED3MM  LED                                                                                     
+LEDP3                 LED3MM      LED3MM  LED                                                                                     
+LEDP4                 LED3MM      LED3MM  LED                                                                                     
+LEDP5                 LED3MM      LED3MM  LED                                                                                     
+LEDP6                 LED3MM      LED3MM  LED                                                                                     
+LEDP7                 LED3MM      LED3MM  LED                                                                                     
+MODULO_I2C   PCF8574P PCF8574P    DIL16   I2C-Bus Remote 8-bit I/O expander                         PCF8574PN 204020     11N8515  
+MOTOROUT              AK300/2     AK300/2 CONNECTOR                                                           unknown    unknown  
+OK1          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK2          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK3          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK4          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK5          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK6          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK7          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+OK8          4N35     4N35        DIL06   MOTOROLA OPTO COUPLER             FAIRCHILD SEMICONDUCTOR 4N35      1328375    72K9946  
+Q1           TIP125   TIP125      TO220   PNP Transistor                                                                          
+Q2           TIP125   TIP125      TO220   PNP Transistor                                                                          
+R1           1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R2           220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R3           1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R4           220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R5           1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R6           220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R7           1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R8           220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R9           1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R10          220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R11          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R12          220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R13          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R14          220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R15          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R16          220      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R17          300      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R18          300      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R19          300      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R20          300      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R21          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R22          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R23          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R24          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R25          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R26          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R27          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R28          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R29          1k       R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+R30          330      R-US_0204/7 0204/7  RESISTOR, American symbol                                                               
+RPI_HEADER            MA20-2      MA20-2  PIN HEADER                                                          unknown    unknown  
+SALIDAS_POT           F09HP       F09HP   SUB-D                                                               unknown    unknown  
+SENALMOTORES          F09HP       F09HP   SUB-D                                                               unknown    unknown  
+T1           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T2           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T3           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T4           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T5           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T6           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T7           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T8           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T9           TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
+T10          TIP122   TIP122      TO220   NPN BIPOLAR DARLINGTON TRANSISTOR                                                       
